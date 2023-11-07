@@ -1,14 +1,15 @@
 import logo from './logo.svg';
-import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header card-body">
         <img src={logo} className="App-logo" alt="logo" />
-        <p className="text-primary">
-          Edit <code>src/App.js</code> and save to reload.
+        <p className="">
+          Modifiez <code>src/App.js</code> et sauvegarder pour recharger.
         </p>
         <a
           className="App-link"
