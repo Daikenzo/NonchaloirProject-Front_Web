@@ -6,11 +6,12 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 // Import Custom CSS
 import './css/App.css';
 import Header from './components/Display/header';
+import HeaderTest from './debug/SampleComponents/header.test';
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Header logo={logo}/>
     </div>
   );
 }

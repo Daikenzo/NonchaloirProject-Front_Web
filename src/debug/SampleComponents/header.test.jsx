@@ -1,7 +1,7 @@
-const Header = () => {
+const Header = ({logo}) => {
 
     return (
-        <header>
+        <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <p className="">
               Modifiez <code>src/App.js</code> et sauvegarder pour recharger.

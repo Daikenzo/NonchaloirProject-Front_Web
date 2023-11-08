@@ -5,6 +5,8 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  -webkit-user-select: none; /* Safari */
+  user-select:none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -15,25 +17,51 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
+  width:100vw;
+
+  position: relative;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items:flex-start;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 1vmin);
   color: white;
 }
 .App-nav{
   display:flex;
   flex-direction: row;
+  width: 100vw;
   list-style: none;
-  margin: 2px auto;
+  margin: -1px 0;
+  
+}
+.App-nav li{
+  padding: 1.5rem;
+  padding-bottom: 1.4rem;
+  flex-direction: column;
+}
+.App-nav > li:nth-child(5){
+  position: relative;
+  margin-left:auto;
+}
+.App-nav > :first-child {
+  margin-left: -2vw;
+}
+
+.App-nav > *:hover{
+  background-color:#f8f8f8a0;
+  cursor: pointer;
 }
 
 
 .App-link {
-  color: #61dafb;
+  color: #f8f8f8;
   text-decoration:none;
+}
+.App-link:hover{
+  font-weight: bold;
 }
 
 @keyframes App-logo-spin {
