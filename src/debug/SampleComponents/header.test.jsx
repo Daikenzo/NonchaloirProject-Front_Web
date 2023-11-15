@@ -1,8 +1,8 @@
-const Header = ({logo}) => {
+const HeaderDisplayDebug = ({logo}) => {
 
     return (
-        <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
+        <header className="App App-header App-debug">
+            <img src={logo} className="App-logo debug" alt="logo" />
             <p className="">
               Modifiez <code>src/App.js</code> et sauvegarder pour recharger.
             </p>
@@ -13,4 +13,4 @@ const Header = ({logo}) => {
     );
 };
 
-export default Header;
+export default HeaderDisplayDebug;

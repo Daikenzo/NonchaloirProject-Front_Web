@@ -1,0 +1,133 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  max-height: 10vmin;
+  min-width: 7vmin;
+  height: auto;
+  pointer-events: none;
+  -webkit-user-select: none; /* Safari */
+  user-select:none;
+}
+.App-logo .debug{
+  height: 40vmin;
+  pointer-events: none;
+  -webkit-user-select: none; /* Safari */
+  user-select:none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo debug {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  position: relative;
+  min-height: 15vh;
+  width:100vw;
+  max-height: 15vh;
+  margin-bottom: 8vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  font-size: calc(10px + 1vmin);
+  color: white;
+}
+
+
+.App-nav{
+  display:flex;
+  align-content: center;
+  max-width: 100vw;
+  width: 100vw;
+  list-style: none;
+  
+}
+.nav-item{
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 16vw;
+  width: 13vw;
+}
+.nav-item:not(.nav-menu-last) {
+  width: 13vw;
+}
+
+ .nav-item:first-of-type {
+   align-self: center;
+ }
+ .nav-item:first-child{
+  flex-direction:row-reverse;
+  flex-wrap:nowrap;
+}
+
+.nav-item:nth-of-type(4){
+  position: relative;
+  margin-right:auto;
+}
+
+.nav-item > li::after{
+  background-color: aliceblue;
+}
+
+body{
+  // background-color: #1d1d1d;
+  background-image: url("http://www.theatrenonchaloir.fr/images/theatre.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+}
+
+.App-main{
+  background-color:  rgba($color: #f8f8f8, $alpha: 0.8);
+  position: relative;
+  margin: auto;
+  padding: 1rem 0.5rem;
+  max-width: 90vw;
+  
+  min-height: 20vh;
+  border-radius:5px;
+
+  flex-direction: column;
+}
+
+
+// Link
+.App-link:not(.App-logo) {
+  color: #f8f8f8;
+  text-decoration:none;
+  min-height: 100%;
+}
+.App-link:hover{
+  font-weight: bold;
+  background-color: grey;
+}
+.App-link:first-child{
+  flex-wrap: nowrap;
+  margin-left: -2vw;
+  padding-right: 2vw;
+  background-color: #282c34;
+}
+
+.App-nav .App-link:hover{
+  cursor: pointer;
+}
+
+// Animation
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

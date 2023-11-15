@@ -1,18 +1,31 @@
 // Import Files 
-import logo from './img/ico/logo.svg';
+import logo from './img/ico/Nonchaloir-logoV2.svg';
 // Import Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 // Import Custom CSS
-import './css/App.css';
-import Header from './components/Display/header';
-import HeaderTest from './debug/SampleComponents/header.test';
+import './App.scss';
+// React
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/public/HomePage"
+import ErrorPage from './pages/ErrorPage';
+import DebugHome from './debug/pages/debug';
 
 function App() {
+
+  //Error Type Value (404: Not Found)
+  const errorType = [404];
+  
+
   return (
-    <div className="App">
-      <Header logo={logo}/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home logo={logo}/>}/>
+        
+        <Route path="/debug" element={<DebugHome logo={logo}/>}/>
+        <Route path="*" element={<ErrorPage logo={logo} error={errorType[0]}/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
