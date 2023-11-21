@@ -1,6 +1,6 @@
 import Header from "../../components/public/Header/HeaderDisplay";
 
-const contactDisplay = () => {
+const contactPage = () => {
     
     return (
         <>
@@ -10,3 +10,5 @@ const contactDisplay = () => {
 
     );
 };
+
+export default contactPage;

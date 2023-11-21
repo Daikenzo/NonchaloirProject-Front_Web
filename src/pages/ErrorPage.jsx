@@ -1,6 +1,6 @@
 import { useRouteError } from "react-router-dom";
 import HeaderDisplay from "../components/common/Header/HeaderDisplay";
-import users from "../debug/sampleBd/users";
+import {UserDefault, users} from "../debug/sampleBd/users";
 
 const ErrorPage = ({logo, error}) => {
     const getError = {
@@ -15,9 +15,9 @@ const ErrorPage = ({logo, error}) => {
     }
     return (
         <>
-            <HeaderDisplay logo={logo} user={users[1]}/>
+            <HeaderDisplay logo={logo} user={users[UserDefault-1]}/>
             <main className="App-main container-fluid">
-                <div className="container">
+                <div className="container alert">
                     <h3 className="uppercase">Erreur {getError.status} - {getError.message}</h3>
                     <p>{getError.describe}</p>
                 </div>

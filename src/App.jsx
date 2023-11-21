@@ -1,29 +1,33 @@
 // Import Files 
-import logo from './img/ico/Nonchaloir-logoV2.svg';
+import {users} from "./debug/sampleBd/users";
 // Import Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 // Import Custom CSS
 import './App.scss';
 // React
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/public/HomePage"
+import { useState } from "react";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import  HomePage from "./pages/public/HomePage";
 import ErrorPage from './pages/ErrorPage';
 import DebugHome from './debug/pages/debug';
+import AccountHomePage from "./pages/public/Account/AccountHomePage";
+// import users from "./debug/sampleBd/users";
+
 
 function App() {
-
   //Error Type Value (404: Not Found)
-  const errorType = [404];
   
 
+  //  console.log(users)
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home logo={logo}/>}/>
-        
-        <Route path="/debug" element={<DebugHome logo={logo}/>}/>
-        <Route path="*" element={<ErrorPage logo={logo} error={errorType[0]}/>} />
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/user/:id" element={<AccountHomePage />}/>
+
+        <Route path="/debug" element={<DebugHome/>}/>
+        <Route path="*" element={<ErrorPage error={404}/>} />
       </Routes>
     </BrowserRouter>
   );
