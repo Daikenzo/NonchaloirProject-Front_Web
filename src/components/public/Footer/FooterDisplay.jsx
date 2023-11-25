@@ -16,7 +16,7 @@ const FooterDisplay = () => {
                     <div className="contact-mail">
                     contact@nonchaloir.com
                     </div>
-                    <Link to={"/contact"} className="contact-form-link">Formulaire de Contact</Link>
+                    <Link to={"/contact"} className="App-link link-info contact-form-link">Formulaire de Contact</Link>
                 </div>
                 <div className="col-4 contacts text-center">test<p>o</p></div>
                 <div className="col-4 contacts text-center">test</div>

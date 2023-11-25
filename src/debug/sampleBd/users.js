@@ -38,9 +38,10 @@ export const users = [
     const userInfo = users.find((user) => {
       return (user.id == id);
     })
+
     return userInfo;
   }
-  export const UserDefault = 2;
+  export let UserDefault = 2;
 
 
   // module.exports = (users, user(users[2]));

@@ -1,7 +1,7 @@
 // Init React
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './scss/index.scss';
+import './index.scss';
 import App from './App';
 import reportWebVitals from './debug/reportWebVitals';
 

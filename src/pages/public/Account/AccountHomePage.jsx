@@ -7,6 +7,7 @@ const AccountHomePage = () => {
     const {id} = useParams();
 
     const userInfo = GetUserInfo(id);
+    console.log(userInfo.id == id)
     // console.log(userInfo.name)
     const EmptyMessage = "Non renseigné"
     
@@ -14,7 +15,7 @@ const AccountHomePage = () => {
     return (
 
         <>
-            <HeaderDisplay user={users[GetUserInfo(UserDefault).id-1]}/>
+            <HeaderDisplay />
             <main className="App-main main-container" >
                 <div className="user container">
                     <h2 className="PageTitle h2 display-1" id="title">Page de {userInfo.name} </h2>
@@ -27,11 +28,12 @@ const AccountHomePage = () => {
                             <li className="card-info list-group-item"><span className="fw-bolder">Adresse Mail</span>: <span className="">{userInfo.email? userInfo.email : EmptyMessage}</span></li>
                             <li className="card-info list-group-item"><span className="fw-bolder">Anniversaire</span>: <span className="">{userInfo.birthday? userInfo.birthday : EmptyMessage}</span></li>
                         </ul>
+                        {(UserDefault+1 == id) && <div className="disconnect container">
+                            <Link to="/" alt="Se déconnecté" className="App-link link-danger">Se déconnecter</Link>
+                        </div>}
                     </div>
                 </div>
-                {(UserDefault == id) && <div className="disconnect container">
-                    <Link to="/" alt="Se déconnecté" className="App-link">Se déconnecter</Link>
-                </div>}
+                
             </main>
         </>
     )

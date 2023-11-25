@@ -1,0 +1,16 @@
+@import '../../../scss/var/variables';
+
+
+.dashboard{
+    background-color: $primary-bg-altcolor;
+    
+}
+
+.App-main{
+    background-color: $secondary-bg-color;
+    min-height: 67vh;
+}
+
+.dashboard .App-nav .App-link:hover{
+    background-color: rgba($color: $primary-color, $alpha: 0.8);
+  }

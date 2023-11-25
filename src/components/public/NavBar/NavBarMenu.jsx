@@ -3,6 +3,8 @@ import LogoDisplay from "../../common/img/LogoDisplay"
 import { GetUserInfo, userIsloggin } from "../../../debug/sampleBd/users";
 
 const NavBarMenu = ({login}) => {
+    // console.log(login)
+
     // Display
     return (
         <nav className="Header-nav nav">
