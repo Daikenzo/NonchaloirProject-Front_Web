@@ -2,25 +2,74 @@
 import './login.scss';
 import HeaderDisplay from '../../../components/common/Header/HeaderDisplay';
 import { users, UserDefault } from '../../../debug/sampleBd/users';
+import {API} from '../../../configs/API_config';
 import FooterDisplay from '../../../components/public/Footer/FooterDisplay';
 import { useState } from 'react';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+    // Init
+    const navigate = useNavigate();
+    // Set Default State
     const [loginError, setLoginError] = useState(false);
-
+    const [errorMessage, setErrorMessage] = useState("Mot de passe ou identifiant incorrect")
     
+    // const loginCreateResponse = await fetch(`https:/${API.defaultpath}/login`)
+
 
     const handleLoginSubmit = async (event) =>{
+        // disable Default Reload
         event.preventDefault();
         // Get Login Info
-        const usermail = event.target.usermail.value;
+        const identifiant = event.target.usermail.value; // Identifiant used: email
         const password = event.target.password.value;
 
-        if ((usermail || password) !== '') {
+        // Verification Empty form - return error if empty
+        if (identifiant === '' || password === '') {
+            setErrorMessage("Les champs ne peux pas être vide")
+            return setLoginError(true)
+        } else {
+            setErrorMessage("Mot de passe ou identifiant incorrect")
             setLoginError(false)
-        } else {setLoginError(true)}
-        
-    }
+        }
+        const loginResponse = await fetch(`http://${API.defaultpath}/users/login`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+      
+            body: JSON.stringify({ identifiant, password }),
+          });
+      
+          // si la réponse est valide
+          if (loginResponse.status === 200) {
+            const loginData = await loginResponse.json();
+      
+            // je récupère le jwt dans le data
+            const jwt = loginData.data;
+            console.log(jwt)
+            // je stocke le jwt dans un cookie
+            Cookies.set("jwt", jwt);
+      
+            // on récupère le username dans le jwt
+            // on récupère toutes les infos de l'user via l'api
+            // en fonction du rôle récupéré avec l'appel fetch
+            // on redirige vers l'accueil admin si le role est admin ou editor
+            // sinon on redirige vers l'accueil public
+      
+            const user = jwtDecode(jwt);
+
+            if (user.data.role === 3 || user.data.role === 2) {
+                navigate("/admin");
+              } else {
+                navigate("/");
+              }
+          } else {
+            setLoginError(true)
+          }
+        };
 
 
     // display
@@ -45,7 +94,7 @@ const LoginPage = () => {
                         </form>
                     </div>
                     {loginError && (
-                        <div className="error container text-bg-danger text-center">Mot de passe ou identifiant incorrect</div>
+                        <div className="error container text-bg-danger text-center">{errorMessage}</div>
                     )}
                 </div>
             </main>

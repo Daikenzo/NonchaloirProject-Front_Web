@@ -8,7 +8,7 @@ const DebugHome = (() => {
 
 
     return (
-        <div className="App-debug App-header" id="debug">
+        <div className="App-debug App-header w-100 h-100" id="debug">
             <HeaderDisplayDebug logo={logo}/>
         </div>
     )

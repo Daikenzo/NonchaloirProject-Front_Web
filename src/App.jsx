@@ -13,7 +13,7 @@ import ErrorPage from './pages/ErrorPage';
   // Public
 import HomePage from "./pages/public/HomePage";
 import AccountHomePage from "./pages/public/Account/AccountHomePage";
-import EventPage from "./pages/public/eventPage";
+import EventPage from "./pages/public/EventPage";
 import ContactPage from "./pages/public/ContactPage";
 import LoginPage from "./pages/public/login/loginPage";
   // Admin
@@ -39,7 +39,7 @@ function App() {
         <Route path="/dashboard" element={<DashBoardPage/>}/>
 
         <Route path="/debug" element={<DebugHome/>}/>
-        <Route path="/admin/*" element={<ErrorPage dashboard= {true} error={404}/>} />
+        <Route path="/admin/*" element={<ErrorPage dashboard={true} error={404}/>} />
         <Route path="*" element={<ErrorPage error={404}/>} />
       </Routes>
     </BrowserRouter>

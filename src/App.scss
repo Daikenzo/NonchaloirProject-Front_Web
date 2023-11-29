@@ -23,7 +23,8 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo debug {
+  #debug .App-logo  {
+    max-height: 40vmin;
     animation: App-logo-spin infinite 20s linear;
   }
 }
@@ -43,6 +44,9 @@
   justify-content: center;
   font-size: calc(10px + 0.9vmin);
   color: $text-color-alt;
+}
+#debug{
+  min-height: 100vh;
 }
 
 .App-nav{

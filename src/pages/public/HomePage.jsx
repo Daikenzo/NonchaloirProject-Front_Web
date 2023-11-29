@@ -20,7 +20,7 @@ const HomePage = () => {
                 <WebsiteTitleSection />
                 <section className=" p-3 w-75 container spectacles-section">
                     <h2 className="title-section">Spectacles en cours</h2>
-                    <div className="   d-flex justify-content-center p-2 bg-dark text-white card  card-group spectacles">
+                    <div className="d-flex justify-content-center card card-group p-2 bg-dark text-white spectacles">
                         <div className=" btn p-5 btn-light rounded-circle m-auto"></div>
                         <div className="rounded-2 card m-3">
                             <h3 className=" card-header">Spectacles en cours</h3>
@@ -32,7 +32,7 @@ const HomePage = () => {
                     </div>
                 </section>
 
-                <section className=" p-3 container w-50 container citation-box">
+                <section className="p-3 container w-50 container citation-box">
                     <div className="citation fst-italic">
                         <p className="citation-text">Elle aimes aussi la paix, les champs. l'air froid du soir</p>
                         <p className="citation-text">Un penser calme et fort, mêlé de Nonchaloir"</p>
@@ -40,7 +40,7 @@ const HomePage = () => {
                     <div className="m-2 citation-author Bold">Sainte-Beuve</div>
                 </section>
 
-                <section className="  p-3 w-75 container discover">
+                <section className="p-3 w-75 container discover">
                     <h2 className="card-title discover text-uppercase text-underline">Découvrez la nonchalance de l'artiste comédien</h2>
                     <div className="m-2 discover discover-info">
                         <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, nostrum. Officia, explicabo dolor corporis cupiditate odio possimus consequuntur sunt tenetur tempore quos aliquid voluptas labore deleniti autem iure obcaecati minus.</div>
@@ -48,7 +48,7 @@ const HomePage = () => {
                     </div>
                     <div className="discover btn btn-dark btn-discord">En savoir plus</div>
                 </section>
-                <section className=" p-3 w-75 container discover">
+                <section className="p-3 w-75 container discover">
                     <h2 className="discover text-styleèunderline ">Devenez Adhérents !</h2>
                     <div className="discover discover-info">
                         <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, nostrum. Officia, explicabo dolor corporis cupiditate odio possimus consequuntur sunt tenetur tempore quos aliquid voluptas labore deleniti autem iure obcaecati minus.</div>

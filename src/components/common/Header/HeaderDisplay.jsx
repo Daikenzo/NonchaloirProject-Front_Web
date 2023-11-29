@@ -21,7 +21,6 @@ const HeaderDisplay = ({dashboard}) => {
         role:users[0].role,
         isLogin:false
     }
-    console.log(userData)
 
 
     return(
