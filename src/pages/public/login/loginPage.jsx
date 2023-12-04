@@ -4,10 +4,10 @@ import HeaderDisplay from '../../../components/common/Header/HeaderDisplay';
 import { users, UserDefault } from '../../../debug/sampleBd/users';
 import {API} from '../../../configs/API_config';
 import FooterDisplay from '../../../components/public/Footer/FooterDisplay';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     // Init
@@ -20,6 +20,7 @@ const LoginPage = () => {
 
 
     const handleLoginSubmit = async (event) =>{
+
         // disable Default Reload
         event.preventDefault();
         // Get Login Info
@@ -70,7 +71,12 @@ const LoginPage = () => {
             setLoginError(true)
           }
         };
-
+    // If Enter into Login Page with jwt remove this
+    useEffect(() => {
+        if (Cookies.get("jwt")) {
+          Cookies.remove("jwt")
+        }
+      }, []);
 
     // display
     return (
@@ -79,7 +85,11 @@ const LoginPage = () => {
             <main onSubmit={handleLoginSubmit} className='App-main main-container d-flex justify-content-between align-content-center col-2 login'>
                 <div className=" container-fluid">
                     <div className="card">
-                        <h3 className=" card-header card-title">Connexion</h3>
+                        <div className="flex-row justify-content-center card-header card-title">
+                            <h3 className="m-auto"><div className="App-Link fw-bold">Connexion</div></h3>
+                            <h3 className=" m-auto"><Link className="App-link link-dark">Incription</Link></h3>
+                        </div>
+                        
                         <form  className="card card-body ContactForm App-form p-2">
 
                             <div className="form-item input-group form-control">
