@@ -10,5 +10,7 @@ const TeamPage = () => {
                 <WebsiteTitleSection />
             </main>
         </>
-    )
-}
+    );
+};
+
+export default TeamPage;

@@ -1,0 +1,22 @@
+{
+    "404":{
+        "status":404,
+        "message":"Page non trouvée",
+        "describe":"La page demandée n'existe pas"
+    },
+    "403":{
+        "status":403,
+        "message":"Accès non autorisé",
+        "describe":"Vous n'avez pas accès au contenu de cette page"
+    },
+    "401":{
+        "status":401,
+        "message":"Accès non autorisé",
+        "describe":"Vous n'avez pas accès au contenu de cette page"
+    },
+    "500":{
+        "status":500,
+        "message":"Serveur Error",
+        "describe":"Un problème serveur est survenue. Veuillez revenir plus tard."
+    }
+}

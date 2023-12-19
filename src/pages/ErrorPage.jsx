@@ -1,16 +1,22 @@
-import { useRouteError } from "react-router-dom";
+import { useParams, useRouteError } from "react-router-dom";
 import HeaderDisplay from "../components/common/Header/HeaderDisplay";
 import {UserDefault, users} from "../debug/sampleBd/users";
 import FooterDisplay from "../components/public/Footer/FooterDisplay";
 import FooterDisplayAdmin from "../components/admin/Footer/FooterDisplayAdmin";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
-const ErrorPage = ({logo, error, dashboard}) => {
+const ErrorPage = ({error, dashboard}) => {
+    const jwt = Cookies.get("jwt");
+    const userData = jwt? (jwtDecode(jwt).data) :  (null);
+    console.log(userData)
     //Error Type Value (404: Not Found) / 403 :Forbiden
+    
     const getError = {
         status: error
     }
     // If a non admin open dashboard, transform any error into 403
-    if (users[UserDefault].role !== "admin" && dashboard){
+    if (!userData || (userData.role < 4 && dashboard)){
         error = 403
     }
     // Set Error Info Data

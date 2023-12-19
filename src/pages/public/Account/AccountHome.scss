@@ -1,0 +1,18 @@
+// Import
+@import '../../../scss/var/variables';
+
+.role-info{
+    padding: 0px 1vmin;
+    font-weight: 700;
+}
+// Color
+.color-normal{
+    color:skyblue
+}
+.color-adherent{
+    color:green;
+}
+.color-admin{
+    color:$secondary-color;
+}
+

@@ -18,6 +18,8 @@ import ContactPage from "./pages/public/ContactPage";
 import LoginPage from "./pages/public/login/loginPage";
   // Admin
 import DashBoardPage from "./pages/admin/DashBoardPage";
+import TeamPage from "./components/public/TeamsPage";
+import SignUpPage from "./pages/public/login/SignUpPage";
 
 // Main
 function App() {
@@ -30,16 +32,17 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/login" element={<LoginPage/>} />
+        <Route path="/login/signup" element={<SignUpPage/>} />
         <Route path="/user/:id" element={<AccountHomePage />}/>
         <Route path="/events" element={<EventPage />} />
-        <Route path="/teams" element={<HomePage />} />
-        <Route path="/project" element={<HomePage />} />
+        <Route path="/teams" element={<TeamPage />} />
+        <Route path="/projects" element={<HomePage />} />
         <Route path="/contact" element={<ContactPage />} />
         
         <Route path="/dashboard" element={<DashBoardPage/>}/>
 
         <Route path="/debug" element={<DebugHome/>}/>
-        <Route path="/admin/*" element={<ErrorPage dashboard={true} error={404}/>} />
+        <Route path="/dashboard/*" element={<ErrorPage dashboard={true} error={404}/>} />
         <Route path="*" element={<ErrorPage error={404}/>} />
       </Routes>
     </BrowserRouter>

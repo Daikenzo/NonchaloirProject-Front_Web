@@ -7,7 +7,9 @@ const DashBoardPage = () => {
         <>
             <HeaderDisplay dashboard={true} />
             <main className="App-main">
-                test                
+                <div className="container title-section">
+                    <h2 className="App-title">Dashboard</h2>
+                </div>   
 
             </main>
             <FooterDisplay />
