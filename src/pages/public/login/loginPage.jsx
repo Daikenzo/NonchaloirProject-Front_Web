@@ -17,7 +17,6 @@ const LoginPage = () => {
     const [errorMessage, setErrorMessage] = useState("Mot de passe ou identifiant incorrect")
     
     // const loginCreateResponse = await fetch(`https:/${API.defaultpath}/login`)
-    console.log("jesuis dans le login page")
     Cookies.remove("jwt");
 
     const handleLoginSubmit = async (event) =>{
@@ -74,11 +73,11 @@ const LoginPage = () => {
           }
         };
     // If Enter into Login Page with jwt remove this
-    useEffect(() => {
-        const jwt = Cookies.get("jwt") || null;
-        if (jwt) {
-        }
-      }, []);
+    // useEffect(() => {
+    //     const jwt = Cookies.get("jwt") || null;
+    //     if (jwt) {
+    //     }
+    //   }, []);
 
     // display
     return (

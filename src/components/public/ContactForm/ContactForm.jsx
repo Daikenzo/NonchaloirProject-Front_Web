@@ -71,7 +71,10 @@ const ContactForm = () => {
               },
             body: formData
     });
+
     const responseCreateJs = await responseCreate.json();
+    
+
     };
     
     //Display
@@ -81,7 +84,7 @@ const ContactForm = () => {
                 <div className="form-item form-control text-bg-danger">
                     <div className="input-group alert-danger d-flex justify-content-center">
                     {formValidation}
-                    </div>
+                    </div> 
                 </div>)}
             <div className="form-item input-group">
                 <div className="form-item input-group form-control">

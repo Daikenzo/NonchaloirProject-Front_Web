@@ -20,12 +20,8 @@ import LoginPage from "./pages/public/login/loginPage";
 import DashBoardPage from "./pages/admin/DashBoardPage";
 import TeamPage from "./components/public/TeamsPage";
 import SignUpPage from "./pages/public/login/SignUpPage";
-
 // Main
 function App() {
-  
-  
-
   //  console.log(users)
   return (
     <BrowserRouter>
