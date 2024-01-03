@@ -17,7 +17,7 @@ const SignUpPage = () => {
     const [errorMessage, setErrorMessage] = useState("Les informations sont incorrectes")
     
     // const loginCreateResponse = await fetch(`https:/${API.defaultpath}/login`)
-    console.log("jesuis dans le login page")
+    console.log("Sign In Page")
     Cookies.remove("jwt");
 
     const handleLoginSubmit = async (event) =>{
@@ -54,7 +54,7 @@ const SignUpPage = () => {
         }
 
 
-        const loginResponse = await fetch(`http://${API.defaultpath}/users/signup`, {
+        const SignInResponse = await fetch(`http://${API.defaultpath}/users/signup`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -62,13 +62,13 @@ const SignUpPage = () => {
             
             body: JSON.stringify({ email, password, username, firstname, lastname, adress, phone}),
           });
-          if(!loginResponse.ok && loginResponse.status >= 500){
+          if(!SignInResponse.ok && SignInResponse.status >= 500){
             console.log("erreur serveur")
             navigate("/")
         }
           // si la réponse est valide
-          if (loginResponse.status === 200) {
-            const Data = await loginResponse.json();
+          if (SignInResponse.status === 200) {
+            const userData = await SignInResponse.json();
 
             navigate("/login");
           } else {

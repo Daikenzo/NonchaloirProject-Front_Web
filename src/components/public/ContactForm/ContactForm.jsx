@@ -156,7 +156,7 @@ const ContactForm = () => {
             </div>
                 
             <div className="form-item item-group input-group form-control flex-md-column">
-                <label htmlFor="subject"  className=" input-group-text flex-md-column form-label" required>Sujet de la demande</label>
+                <label htmlFor="subject"  className=" input-group-text flex-md-column form-label" required>Sujet de la demande *</label>
                 <textarea name="subject" id="" cols="30" rows="10"></textarea>
             </div>
             <input className="form-item App-btn btn btn-dark" alt="send" type="submit"/>
