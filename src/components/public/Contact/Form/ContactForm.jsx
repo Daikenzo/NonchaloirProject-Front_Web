@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import { API } from "../../../configs/API_config";
+import { API } from "../../../../configs/API_config";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 // import { useNavigate } from "react-router-dom";

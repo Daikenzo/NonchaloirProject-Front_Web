@@ -1,25 +1,33 @@
 import { Link } from "react-router-dom"
 import "./Footer.scss"
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
+import LegalMentionDisplay from "../LegalMention/LegalMention";
+import ContactBox from "../Contact/ContactBox";
+import PartnerBox from "../Partner/PartnerBox";
 
 const FooterDisplay = () => {
+    const [isAdmin, setIsAdmin] = useState(false);
+    useEffect(() => {
+        
+        const jwt = Cookies.get("jwt") || null;
+        if (jwt) {
+            const user = jwtDecode(jwt);
+            if (user.data.role === 5) {
+                setIsAdmin(true)
+              }else{
+                setIsAdmin(false)
+              }
+        }
+      }, []);
     // Display
     return (
         <footer className=" App-footer footer-content footer-container color-white main-container" >
             <nav className="row footer-nav" >
-                <div className="col-4 contacts">
-                    <h4 className="contact-title">Théâtre du Nonchaloir</h4>
-                    <div className="adress">
-                        <p className="adress-name">Chateau Ornon, salle n°3</p>
-                        <p className="adress-libelle">16 Impasse D'ornon</p>
-                        <p className="adress-city">33170 Gradignan</p>
-                    </div>
-                    <div className="contact-mail">
-                    contact@nonchaloir.com
-                    </div>
-                    <Link to={"/contact"} className="App-link link-info contact-form-link">Formulaire de Contact</Link>
-                </div>
-                <div className="col-4 contacts text-center">test<p>o</p></div>
-                <div className="col-4 contacts text-center">test</div>
+                <ContactBox />
+                <LegalMentionDisplay />
+                <PartnerBox />
             </nav>
         </footer>
     );

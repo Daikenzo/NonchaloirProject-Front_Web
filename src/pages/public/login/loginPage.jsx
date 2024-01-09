@@ -8,14 +8,23 @@ import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import { Link, useNavigate } from 'react-router-dom';
+Cookies.ExpireIn = 60 * 60; // Minute * Second
 
-const LoginPage = () => {
+const LoginPage = ({sucessState = false}) => {
     // Init
     const navigate = useNavigate();
     // Set Default State
     const [loginError, setLoginError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("Mot de passe ou identifiant incorrect")
+    const [successMessage, setSucessMessage] = useState("L'utilisateur a été crée")
     
+    // Check is SignInState
+    if(sucessState){
+        setSucessMessage("Le compte a été crée")
+        setTimeout(() => {
+            sucessState=false;
+          }, "500")
+    }
     // const loginCreateResponse = await fetch(`https:/${API.defaultpath}/login`)
     Cookies.remove("jwt");
 
@@ -49,26 +58,32 @@ const LoginPage = () => {
           // si la réponse est valide
           if (loginResponse.status === 200) {
             const loginData = await loginResponse.json();
-      
+            console.log(loginData)
             // je récupère le jwt dans le data
             const jwt = loginData.data;
-            // je stocke le jwt dans un cookie
-            Cookies.set("jwt", jwt); //localstorage.setItem("jwt");
+            // Get JWT Data and expire Token
+            const user = jwtDecode(jwt);
+            // Create expiration Date
+            const expireDate = new Date(new Date().getTime() + Cookies.ExpireIn * 1000)
+            // Check ExpireDate
+            // console.log(expireDate)
+            // je stocke le jwt dans un cookie with Expirations
+            Cookies.set("jwt", jwt, { expires: expireDate }); //localstorage.setItem("jwt");
       
             // on récupère le username dans le jwt
             // on récupère toutes les infos de l'user via l'api
             // en fonction du rôle récupéré avec l'appel fetch
             // on redirige vers l'accueil admin si le role est admin ou editor
             // sinon on redirige vers l'accueil public
-      
-            const user = jwtDecode(jwt);
-
+                  
+            // Redirect into homePage
             if (user.data.role === 3 || user.data.role === 2) {
                 navigate("/");
               } else {
                 navigate("/");
               }
           } else {
+            // Set Error
             setLoginError(true)
           }
         };
@@ -85,6 +100,9 @@ const LoginPage = () => {
             <HeaderDisplay/>
             <main onSubmit={handleLoginSubmit} className='App-main main-container d-flex justify-content-between align-content-center col-2 login'>
                 <div className=" container-fluid">
+                {sucessState && (
+                        <div className="error container text-bg-sucess text-center">{successMessage}</div>
+                    )}
                     <div className="card">
                         <div className="flex-row justify-content-center card-header card-title">
                             <h3 className="m-auto"><div className="App-Link fw-bold">Connexion</div></h3>

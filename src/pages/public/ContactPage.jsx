@@ -1,5 +1,5 @@
 import HeaderDisplay from '../../components/common/Header/HeaderDisplay';
-import ContactForm from '../../components/public/ContactForm/ContactForm';
+import ContactForm from '../../components/public/Contact/Form/ContactForm';
 import FooterDisplay from '../../components/public/Footer/FooterDisplay';
 
 const ContactPage = () => {
