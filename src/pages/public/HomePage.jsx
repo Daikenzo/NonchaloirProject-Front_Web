@@ -54,7 +54,7 @@ const HomePage = () => {
                         <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, nostrum. Officia, explicabo dolor corporis cupiditate odio possimus consequuntur sunt tenetur tempore quos aliquid voluptas labore deleniti autem iure obcaecati minus.</div>
                         <div>Mollitia qui, numquam perferendis ea vitae accusamus libero modi sed sapiente esse eum similique laboriosam quam! Quasi tenetur non voluptate veritatis. Nulla suscipit aspernatur odit odio commodi consequuntur ex expedita?</div>
                     </div>
-                    <div className="m-2 discover btn btn-dark btn-discord">En savoir plus</div>
+                    <Link to="/adherent" className="m-2 discover btn btn-dark btn-discord">En savoir plus</Link>
                 </section>
                 <div className="pre-footer"></div>
             </main>

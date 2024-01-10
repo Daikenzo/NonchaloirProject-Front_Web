@@ -16,6 +16,7 @@ import AccountHomePage from "./pages/public/Account/AccountHomePage";
 import EventPage from "./pages/public/EventPage";
 import ContactPage from "./pages/public/ContactPage";
 import LoginPage from "./pages/public/login/loginPage";
+import AdherentPage from "./pages/public/AdherentPage";
   // Admin
 import DashBoardPage from "./pages/admin/DashBoardPage";
 import TeamPage from "./components/public/TeamsPage";
@@ -34,6 +35,7 @@ function App() {
         <Route path="/teams" element={<TeamPage />} />
         <Route path="/projects" element={<HomePage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/adherent" element={<AdherentPage />} />
         
         <Route path="/dashboard" element={<DashBoardPage/>}/>
 
