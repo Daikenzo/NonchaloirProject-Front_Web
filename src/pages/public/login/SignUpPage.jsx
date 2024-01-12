@@ -28,7 +28,7 @@ const SignUpPage = () => {
         const email = event.target.email.value; // Identifiant used: email
         const password = event.target.password.value;
         const passwordConfirm = event.target.passwordConfirm.value;
-        const username = (event.target.username.value || event.target.username.value === "")? event.target.username.value : null;
+        const username = (event.target.username.value || event.target.username.value !== "")? event.target.username.value : event.target.email.value;
         
         const firstname = event.target.firstname.value;
         const lastname = event.target.lastname.value;
@@ -47,17 +47,24 @@ const SignUpPage = () => {
             setErrorMessage("Les champs ne peux pas être vide")
             console.log(email, password, firstname)
             return setLoginError(true)
-        } else {
-            setErrorMessage("Mot de passe ou identifiant incorrect")
-            setLoginError(false)
         }
-        // verification Info
+        // Check verification Info
+            // password reconfirm
         if (password !== passwordConfirm) {
             setErrorMessage("les mot de passes ne sont pas identique");
             return setLoginError(true);
         }
+        // Invalid Value
+        if((username.split(' ').join('') !== username)
+            || (firstname.split(' ').join('') !== firstname)
+            || (lastname.split(' ').join('') !== lastname)
+        ){
+            setErrorMessage("Saisie Incorecte")
+            return setLoginError(true)
+        }
 
-
+        // If not error, disable message error
+        setLoginError(false) 
         const SignInResponse = await fetch(`http://${API.defaultpath}/users/signup`, {
             method: "POST",
             headers: {

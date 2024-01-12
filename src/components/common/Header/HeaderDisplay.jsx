@@ -41,7 +41,7 @@ const HeaderDisplay = ({dashboard=false}) => {
             </header>) : (
                 <header className="App App-header dashboard">
                 <DashBoardNavBarMenu login={userData} isLogin={isconnected}/>
-                </header>
+            </header>
             )}
         </>
         
