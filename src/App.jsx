@@ -6,7 +6,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import './scss/var/_variables.scss'
 import './App.scss';
 // React
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 // Page Components
 import DebugHome from './debug/pages/debug';
 import ErrorPage from './pages/ErrorPage';
@@ -30,6 +30,16 @@ import ReservationListByEventPage from "./pages/admin/Events/Reservations/Reserv
 // Main
 function App() {
   //  console.log(users)
+  const {error} = useParams();
+  const setStatus = (status)=>{
+
+    return status
+  }
+  const setErrorPath = (status)=>{
+
+    return `error/`
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -53,8 +63,10 @@ function App() {
         <Route path="/dashboard/notifications" element={<AdminContactsMessagePage/>}/>
 
         <Route path="/debug" element={<DebugHome/>}/>
+        
         <Route path="/dashboard/*" element={<ErrorPage dashboard={true} error={404}/>} />
-        <Route path="*" element={<ErrorPage error={404}/>} />
+        <Route path="error/:id" element={<ErrorPage error={setStatus(error)}/>} />
+        <Route path="*" element={<ErrorPage error={setStatus(404)}/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -7,7 +7,7 @@ import FooterDisplay from '../../../components/public/Footer/FooterDisplay';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 Cookies.ExpireIn = 60 * 60; // Minute * Second
 const debug = true;
 
@@ -24,7 +24,7 @@ const LoginPage = ({sucessState = false}) => {
         setSucessMessage("Le compte a été crée")
         setTimeout(() => {
             sucessState=false;
-          }, "500")
+          }, 500)
     }
     // const loginCreateResponse = await fetch(`https:/${API.defaultpath}/login`)
     Cookies.remove("jwt");
@@ -44,6 +44,8 @@ const LoginPage = ({sucessState = false}) => {
             setErrorMessage("Mot de passe ou identifiant incorrect")
             setLoginError(false)
         }
+        
+        
         const loginResponse = await fetch(`http://${API.defaultpath}/users/login`, {
             method: "POST",
             headers: {
@@ -51,10 +53,23 @@ const LoginPage = ({sucessState = false}) => {
             },
             
             body: JSON.stringify({ identifiant, password }),
-          });
+          }).catch( error =>{
+            if (error instanceof TypeError){
+                console.log(error)
+                setErrorMessage(error.message)
+                setLoginError(true)
+                return navigate(`/error/${500}`);
+            }
+          }
+          );
+          if(!loginResponse){
+            return navigate(`/error/${500}`);
+          }
+          
+
           if(!loginResponse.ok && loginResponse.status >= 500){
             console.log("erreur serveur")
-            navigate("/")
+            return navigate("/")
         }
           // si la réponse est valide
           if (loginResponse.status === 200) {
