@@ -32,7 +32,7 @@ const SignUpPage = () => {
         
         const firstname = event.target.firstname.value;
         const lastname = event.target.lastname.value;
-        
+        const birthday = event.target.birthday.value
         const adress = {
             "number": parseInt(event.target.adressNumber.value),
             "street": event.target.street.value,
@@ -71,7 +71,7 @@ const SignUpPage = () => {
               "Content-Type": "application/json",
             },
             
-            body: JSON.stringify({ email, password, firstname, username, lastname, adress, phone}),
+            body: JSON.stringify({ email, password, firstname, username, lastname, adress, phone, birthday}),
           });
           if(!SignInResponse.ok && SignInResponse.status >= 500){
             console.log("erreur serveur")
@@ -103,7 +103,7 @@ const SignUpPage = () => {
             <HeaderDisplay/>
             <main onSubmit={handleLoginSubmit} className='App-main main-container d-flex justify-content-between align-content-center col-4 login'>
                 <div className=" container-fluid">
-                    <div className="card">
+                    <div className="card container">
                         <div className="flex-row justify-content-center card-header card-title">
                             <h3 className="m-auto"><Link to="/login" className="App-link link-dark">Connexion</Link></h3>
                             <h3 className=" m-auto"><div className="App-Link fw-bold">Incription</div></h3>
@@ -113,48 +113,52 @@ const SignUpPage = () => {
 
                             <div className="form-item input-group form-control">
                                 <label htmlFor="email" className="input-group-text">Email</label>
-                                <input name="email" type="text" className="input-group-text flex-fill" required/>
+                                <input name="email" id="email" type="text" className="input-group-text flex-fill" required/>
                             </div>
                             <div className="form-item item-group input-group form-control">
                                 <label htmlFor="password" className="input-group-text">Mot de passe</label>
-                                <input name="password" type="password" className="input-group-text flex-fill" required/>
+                                <input name="password" id="password" type="password" className="input-group-text flex-fill" required/>
                             </div>
                             <div className="form-item item-group input-group form-control">
                                 <label htmlFor="passwordConfirm" className="input-group-text">Confirmer Mot de passe</label>
-                                <input name="passwordConfirm" type="password" className="input-group-text flex-fill" required/>
+                                <input name="passwordConfirm" id="passwordConfirm" type="password" className="input-group-text flex-fill" required/>
+                            </div>
+                            <div className="form-item item-group input-group form-control">
+                                <label htmlFor="birthday" className="input-group-text">Date de naissance</label>
+                                <input name="birthday" id="birthay" type="date" className="input-group-text flex-fill"/>
                             </div>
                             <div className="form-item item-group input-group form-control">
                                 <label htmlFor="firstname" className="input-group-text">Prénom</label>
-                                <input name="firstname" type="text" className="input-group-text flex-fill" required/>
+                                <input name="firstname" id="firstname" type="text" className="input-group-text flex-fill" required/>
                             </div>
                             <div className="form-item item-group input-group form-control">
                                 <label htmlFor="lastname" className="input-group-text">Nom</label>
-                                <input name="lastname" type="text" className="input-group-text flex-fill" required/>
+                                <input name="lastname" id="lastname" type="text" className="input-group-text flex-fill" required/>
                             </div>
                             <div className="form-item item-group input-group form-control">
                                 <label htmlFor="username" className="input-group-text">Pseudonyme</label>
-                                <input name="username" type="text" className="input-group-text flex-fill"/>
+                                <input name="username" id="username" type="text" className="input-group-text flex-fill"/>
                             </div>
                             <div className="form-item item-group form-control adressForm">
                                 <label htmlFor="adress" className="input-group-text">Adresse</label>
                                 <div name="adress" className="form-item item-group input-group form-control">
                                     <div className="form-item item-group input-group flex-fill">
-                                        <label htmlFor="adressNumber" className="input-group-text">Numéro</label>
-                                        <input name="adressNumber" type="number" className="input-group-text flex-fill"/>
-                                        <label htmlFor="street" className="input-group-text">Libellé de la rue</label>
-                                        <input name="street" type="text" className="input-group-text flex-fill" required/>
+                                        <label htmlFor="adressNumber" className="input-group-text col-6 col-md-auto">Numéro</label>
+                                        <input name="adressNumber" id="adressNumber" type="number" className="input-group-text flex-fill"/>
+                                        <label htmlFor="street" className="input-group-text col-6 col-md-auto">Libellé de la rue</label>
+                                        <input name="street" id="street" type="text" className="input-group-text flex-fill" required/>
                                     </div>
                                     
                                     <div className="form-item item-group input-group form-control flex-fill">
                                         <label htmlFor="postcode" className="input-group-text">PostCode</label>
-                                        <input name="postcode" type="number" className="input-group-text flex-fill" required/>
+                                        <input name="postcode" id="postcode" type="number" className="input-group-text flex-fill" required/>
                                         <label htmlFor="city" className="input-group-text">Ville</label>
-                                        <input name="city" type="text" className="input-group-text flex-fill" required/>
+                                        <input name="city" id="city" type="text" className="input-group-text flex-fill" required/>
                                     </div>
                                 </div>
                                 <div className="form-item item-group input-group form-control">
                                     <label htmlFor="phone" className="input-group-text">Téléphone</label>
-                                    <input name="phone" type="tel" pattern="[0-9]{10}" className="input-group-text flex-fill"/>
+                                    <input name="phone" id="phone" type="tel" pattern="[0-9]{10}" className="input-group-text flex-fill"/>
                                 </div>
                             </div>
 

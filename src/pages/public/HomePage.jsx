@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import HeaderDisplay from "../../components/common/Header/HeaderDisplay";
 import FooterDisplay from "../../components/public/Footer/FooterDisplay";
 import WebsiteTitleSection from "../../components/public/Title/TitleSection";
+import LastEventCards from "../../components/public/Events/LastEvent/LastEventCards";
 
 const HomePage = () => {
 
@@ -18,19 +19,7 @@ const HomePage = () => {
             <HeaderDisplay />
             <main className="App App-main main-container">
                 <WebsiteTitleSection />
-                <section className=" p-3 w-75 container spectacles-section">
-                    <h2 className="title-section">Spectacles en cours</h2>
-                    <div className="d-flex justify-content-center card card-group p-2 bg-dark text-white spectacles">
-                        <div className=" btn p-5 btn-light rounded-circle m-auto"></div>
-                        <div className="rounded-2 card m-3">
-                            <h3 className=" card-header">Spectacles en cours</h3>
-                            <div className="card-body">d</div>
-                        </div>
-                        <div className="rounded-2 card m-3">d</div>
-                        <div className="rounded-2 card m-3">d</div>
-                        <div className=" btn p-5 btn-light rounded-circle m-auto"></div>
-                    </div>
-                </section>
+                <LastEventCards />  
 
                 <section className="p-3 container w-50 container citation-box">
                     <div className="citation fst-italic">

@@ -25,9 +25,12 @@ const DashBoardNavBarMenu = ({login, isLogin}) => {
                 <Link className="nav-item App-link header-link" to={"/dashboard"}><li className="nav-item" id="title">Théâtre du Nonchaloir
                 <LogoDisplay classadd={"nav-item"}/></li></Link>
                 <Link className="nav-item App-link header-link" to={"/dashboard/events"}><li className="nav-item"><div><p>Spectacles / </p><p> Évènenements</p></div></li></Link>
-                <Link className="nav-item App-link header-link" to={"/dashboard/teams"}><li className="nav-item">Notre troupes</li></Link>
-                <Link className="nav-item App-link header-link" to={"/dashboard/projects"}><li className="nav-item">Nos réalisations</li></Link>
-               {/* <Link className="nav-item App-link" to={"/projects"}><li className="nav-item">Nos Ateliers</li></Link> */}
+                <Link className="nav-item App-link header-link" to={"/dashboard/users"}><li className="nav-item">Utilisateurs</li></Link>
+                {/* <Link className="nav-item App-link" to={"/projects"}><li className="nav-item">Nos Ateliers</li></Link> */}
+                {login.role >=5 ? 
+                <Link className="nav-item App-link header-link" to={"/dashboard/notifications"}><li className="nav-item">Notification de Contact</li></Link> :
+                <Link className="nav-item " to={""}><li className="nav-item"></li></Link>
+                }
                </>
                 )}
                 

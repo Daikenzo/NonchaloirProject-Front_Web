@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import { Link, useNavigate } from 'react-router-dom';
 Cookies.ExpireIn = 60 * 60; // Minute * Second
+const debug = true;
 
 const LoginPage = ({sucessState = false}) => {
     // Init
@@ -64,11 +65,14 @@ const LoginPage = ({sucessState = false}) => {
             // Get JWT Data and expire Token
             const user = jwtDecode(jwt);
             // Create expiration Date
-            const expireDate = new Date(new Date().getTime() + Cookies.ExpireIn * 1000)
+            const expireDate = new Date(
+                new Date().getTime() + Cookies.ExpireIn * 1000)
             // Check ExpireDate
             // console.log(expireDate)
             // je stocke le jwt dans un cookie with Expirations
-            Cookies.set("jwt", jwt, { expires: expireDate }); //localstorage.setItem("jwt");
+            Cookies.set("jwt", jwt, { 
+                // expires: expireDate 
+            }); //localstorage.setItem("jwt");
       
             // on récupère le username dans le jwt
             // on récupère toutes les infos de l'user via l'api
@@ -103,7 +107,7 @@ const LoginPage = ({sucessState = false}) => {
                 {sucessState && (
                         <div className="error container text-bg-sucess text-center">{successMessage}</div>
                     )}
-                    <div className="card">
+                    <div className="card container">
                         <div className="flex-row justify-content-center card-header card-title">
                             <h3 className="m-auto"><div className="App-Link fw-bold">Connexion</div></h3>
                             <h3 className=" m-auto"><Link to="/login/signup" className="App-link link-dark">Incription</Link></h3>

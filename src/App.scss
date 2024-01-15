@@ -146,6 +146,18 @@ body{
   flex-direction: row;
 }
 
+.adress {
+  list-style:none;
+  font-style: italic;
+}
+.adress-name{
+  font-weight: 650;
+}
+
+.adress li:last-of-type{
+  text-transform: uppercase;
+}
+
 
 // Link
 .App-link:not(.App-logo) {

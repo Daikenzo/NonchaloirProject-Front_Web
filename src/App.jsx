@@ -19,8 +19,14 @@ import LoginPage from "./pages/public/login/loginPage";
 import AdherentPage from "./pages/public/AdherentPage";
   // Admin
 import DashBoardPage from "./pages/admin/DashBoardPage";
-import TeamPage from "./components/public/TeamsPage";
+import TeamPage from "./pages/public/TeamsPage";
 import SignUpPage from "./pages/public/login/SignUpPage";
+import DashboardEventsPage from "./pages/admin/Events/DisplayEventPage";
+import DashboardUsersPage from "./pages/admin/Users/AdminUsersPage";
+import AdminContactsMessagePage from "./pages/admin/Contacts/AdminContactsMessagePage";
+import DashboardUsersCreatePage from "./pages/admin/Users/AdminCreateUsersPage"
+import ReservationListPage from "./pages/admin/Events/Reservations/ReservationsPage";
+import ReservationListByEventPage from "./pages/admin/Events/Reservations/ReservationsByEventPage";
 // Main
 function App() {
   //  console.log(users)
@@ -38,6 +44,13 @@ function App() {
         <Route path="/adherent" element={<AdherentPage />} />
         
         <Route path="/dashboard" element={<DashBoardPage/>}/>
+        <Route path="/dashboard/events" element={<DashboardEventsPage/>}/>
+        <Route path="/dashboard/events/:id" element={<DashboardEventsPage/>}/>
+        <Route path="/dashboard/events/:id/reservations" element={<ReservationListByEventPage/>}/>
+        <Route path="/dashboard/reservations" element={<ReservationListPage/>}/>
+        <Route path="/dashboard/users" element={<DashboardUsersPage/>}/>
+        <Route path="/dashboard/users/create" element={<DashboardUsersCreatePage/>}/>
+        <Route path="/dashboard/notifications" element={<AdminContactsMessagePage/>}/>
 
         <Route path="/debug" element={<DebugHome/>}/>
         <Route path="/dashboard/*" element={<ErrorPage dashboard={true} error={404}/>} />

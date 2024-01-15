@@ -14,6 +14,7 @@ const AccountHomePage = () => {
     const EmptyMessage = "Non renseigné"
     const [userInfo, setUserInfo] = useState([]);
     const [userName, setUserName] = useState([""])
+    const [adress, setAdress] = useState([""]);
     const [userPhone, setUserPhone] = useState("")
     const [roleColor, setRoleColor] = useState("role-info color-normal")
     const navigate = useNavigate();
@@ -44,6 +45,7 @@ const AccountHomePage = () => {
         
         // set 
         if (userInfo.email) setUsername(responseJs.data);
+        responseJs.data.adress? setAdress(responseJs.data.adress) : setAdress("")
         // Set Role Status color
         let roleRange = responseJs.data.RoleId
         if(roleRange <= 1) setRoleColor("role-info color-normal")
@@ -79,16 +81,33 @@ const AccountHomePage = () => {
                             {(userInfo.username && userInfo.username !== userInfo.email)?(
                             <li className="card-info  card-group list-group-item">
                                 <span className="fw-bolder">Username</span>: <span className="">{userInfo.username}</span>
-                                <a href="#edit" alt="usernameDefine" className="App-link link-info p-3">Modifier</a>
+                                {/* {(ActualUserId === parseInt(id)) &&
+                                <a href="#edit" alt="usernameDefine" className="App-link link-info p-3">Modifier</a>} */}
                             </li>) : (<li className="card-info  card-group list-group-item">
                                 <span className="fw-bolder">Username</span>: <span className="">{EmptyMessage}</span>
-                                <a href="#edit" alt="usernameDefine" className="App-link link-info p-3">Définir</a>
+                                {/* {(ActualUserId === parseInt(id)) &&
+                                <a href="#edit" alt="usernameDefine" className="App-link link-info p-3">Définir</a>} */}
                             </li>)
                             }
                             
                             <li className="card-info list-group-item"><span className="fw-bolder">Rôle</span>: 
                                 <span className={roleColor}>{userInfo.Role.label}</span>
                             </li>
+                            <li className="card-info list-group-item">
+                                <span className="fw-bolder">Adresse</span> :
+                                    {adress ? (
+                                    <div className="p-2 list-element-item-none">
+                                        <ul className="text-group adress">
+                                            {userInfo.adress.adressName && <li>Nom du local</li>}
+                                            <li><span>{userInfo.adress.number}</span> <span>{userInfo.adress.street}</span></li>
+                                            {/* <li>Batiment D, Porte 2</li> */}
+                                            <li><span>{userInfo.adress.postCode}</span> <span>{userInfo.adress.city}</span></li>
+                                        </ul>
+                                    </div>
+                                    ): (
+                                        <span className="p-2 list-element-item-none">Non renseigné</span>
+                                    )}
+                                </li>
                             <li className="card-info list-group-item"><span className="fw-bolder">Téléphone</span>: <span className="">{userInfo.phone? userInfo.phone: EmptyMessage}</span></li>
                             <li className="card-info list-group-item"><span className="fw-bolder">Adresse Mail</span>: <span className="">{userInfo.email? userInfo.email : EmptyMessage}</span></li>
                             <li className="card-info list-group-item"><span className="fw-bolder">Anniversaire</span>: <span className="">{userInfo.birthday? userInfo.birthday : EmptyMessage}</span></li>

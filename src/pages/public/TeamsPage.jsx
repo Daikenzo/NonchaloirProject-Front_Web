@@ -1,5 +1,5 @@
-import HeaderDisplay from "../common/Header/HeaderDisplay"
-import WebsiteTitleSection from "./Title/TitleSection"
+import HeaderDisplay from "../../components/common/Header/HeaderDisplay"
+import WebsiteTitleSection from "../../components/public/Title/TitleSection"
 
 const TeamPage = () => {
     // Display
