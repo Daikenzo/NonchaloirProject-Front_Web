@@ -2,7 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {GetUserInfo, UserDefault, users} from "../../../debug/sampleBd/users";
 import HeaderDisplay from "../../../components/common/Header/HeaderDisplay"
 import { useEffect, useState } from "react";
-import {API} from "../../../configs/API_config";
+import {API, jwt} from "../../../configs/API_config";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import './AccountHome.scss';
@@ -21,10 +21,12 @@ const AccountHomePage = () => {
     
     // Disconect
     const handleLogout = () => {
-        Cookies.remove("jwt")
+        jwt.remove()
     };
-    const jwt = Cookies.get("jwt"); //localstorage.getItem("jwt");
-    const ActualUserId = jwt? (jwtDecode(jwt).data.id) :  (null);
+    // const jwt = Cookies.get("jwt"); //localstorage.getItem("jwt");
+    const user = jwt.get()
+    const ActualUserId = user.id;
+    console.log(ActualUserId)
 
     const setUsername = (data =>{
         const username = (data.email !== data.username)? data.username : (`${data.firstname} ${data.lastname}`)
@@ -35,10 +37,10 @@ const AccountHomePage = () => {
         const path= `http://${API.defaultpath}/users`;
         const response = await fetch(`${path}/${id}`, {
           method: "GET",
-        });
+        })
         // If undefined user, return 404 error
          if (!response.ok) {
-            return navigate(`404`);
+            return navigate(`error?404`);
         }
         const responseJs = await response.json();
         console.log(responseJs.data)

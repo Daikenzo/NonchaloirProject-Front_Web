@@ -2,7 +2,7 @@
 import './login.scss';
 import HeaderDisplay from '../../../components/common/Header/HeaderDisplay';
 import { users, UserDefault } from '../../../debug/sampleBd/users';
-import {API} from '../../../configs/API_config';
+import {API, getResponse, jwt} from '../../../configs/API_config';
 import FooterDisplay from '../../../components/public/Footer/FooterDisplay';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
@@ -26,8 +26,8 @@ const LoginPage = ({sucessState = false}) => {
             sucessState=false;
           }, 500)
     }
-    // const loginCreateResponse = await fetch(`https:/${API.defaultpath}/login`)
-    Cookies.remove("jwt");
+    // If Manual Input Page, remove jwt
+    jwt.remove();
 
     const handleLoginSubmit = async (event) =>{
         // disable Default Reload
@@ -46,48 +46,42 @@ const LoginPage = ({sucessState = false}) => {
         }
         
         
-        const loginResponse = await fetch(`http://${API.defaultpath}/users/login`, {
+        const loginFetch = await fetch(`http://${API.defaultpath}/users/login`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             
             body: JSON.stringify({ identifiant, password }),
-          }).catch( error =>{
+          })
+          .catch( error =>{
             if (error instanceof TypeError){
                 console.log(error)
-                setErrorMessage(error.message)
+                setErrorMessage(error)
                 setLoginError(true)
                 return navigate(`/error/${500}`);
             }
-          }
-          );
-          if(!loginResponse){
-            return navigate(`/error/${500}`);
-          }
+          });
+
+          const loginResponse = getResponse(loginFetch)
+
+          
           
 
           if(!loginResponse.ok && loginResponse.status >= 500){
             console.log("erreur serveur")
-            return navigate("/")
+            return navigate(`/error/${500}`);
         }
           // si la réponse est valide
           if (loginResponse.status === 200) {
-            const loginData = await loginResponse.json();
-            console.log(loginData)
-            // je récupère le jwt dans le data
-            const jwt = loginData.data;
-            // Get JWT Data and expire Token
-            const user = jwtDecode(jwt);
-            // Create expiration Date
-            const expireDate = new Date(
-                new Date().getTime() + Cookies.ExpireIn * 1000)
-            // Check ExpireDate
-            // console.log(expireDate)
-            // je stocke le jwt dans un cookie with Expirations
-            Cookies.set("jwt", jwt, { 
-                // expires: expireDate 
-            }); //localstorage.setItem("jwt");
+            
+            // je récupère le jwt dans le data e
+            const loginData = await loginResponse.data
+            console.log("teste", loginData)
+            // Get User Data and expire Token
+            const user = loginData
+            // Create & Set Jwt Cookie
+            jwt.set(loginData)
       
             // on récupère le username dans le jwt
             // on récupère toutes les infos de l'user via l'api
@@ -96,7 +90,7 @@ const LoginPage = ({sucessState = false}) => {
             // sinon on redirige vers l'accueil public
                   
             // Redirect into homePage
-            if (user.data.role === 3 || user.data.role === 2) {
+            if (user.role === 3 || user.role === 2) {
                 navigate("/");
               } else {
                 navigate("/");

@@ -12,12 +12,17 @@ const ErrorPage = ({error, dashboard}) => {
     const userData = jwt? (jwtDecode(jwt).data) :  (null);
     console.log(userData)
     //Error Type Value (404: Not Found) / 403 :Forbiden
-
+    console.log(error)
     // Get & Set Error
     const getError = {
-        status: id
+        status: id || error
     }
-    error = parseInt(getError.status)
+    if (getError.status instanceof Number){
+        error = getError.status
+    } else{
+        error = parseInt(getError.status)
+    }
+    
     // Set Error Info Data
     if (error >= 400){
         getError.message = "Erreur de donnée client";
@@ -27,7 +32,7 @@ const ErrorPage = ({error, dashboard}) => {
     if (error === 404 || getError.status === '404'){
         getError.message = "Page Non trouvée";
         getError.describe = "La page demandée n'existe pas";
-        getError.status = id
+        getError.status = error
     }
     if (error === 401 || error === 403){
         getError.message = "Accès non autorisé";

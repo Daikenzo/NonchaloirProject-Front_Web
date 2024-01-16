@@ -8,13 +8,14 @@ import NavBarMenu from "../../public/NavBar/NavBarMenu"
 import DashBoardNavBarMenu from "../../admin/Navbar/DashboardNavBarMenu";
 // Test Data
 import { UserDefault, userIsloggin, users } from "../../../debug/sampleBd/users";
+import { jwt } from "../../../configs/API_config";
 
 const HeaderDisplay = ({dashboard=false}) => {
-    // Get JWT Token
-    const jwt = Cookies.get("jwt");
+    // const jwt = Cookies.get("jwt");
     const navigate = useNavigate();
-    const [isconnected, setUserLoginStatut] = useState(false)
-    const userData = jwt? (jwtDecode(jwt).data) :  (null);
+    const [isconnected, setUserLoginStatut] = useState(false);
+    // Get JWT Token
+    const userData = jwt.get();
     console.log("je lance le header")
 
     useEffect(() => {

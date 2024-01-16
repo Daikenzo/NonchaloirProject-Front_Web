@@ -2,7 +2,7 @@
 import './login.scss';
 import HeaderDisplay from '../../../components/common/Header/HeaderDisplay';
 import { users, UserDefault } from '../../../debug/sampleBd/users';
-import {API} from '../../../configs/API_config';
+import {API, getResponse, getResponseData, jwt} from '../../../configs/API_config';
 import FooterDisplay from '../../../components/public/Footer/FooterDisplay';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
@@ -19,7 +19,7 @@ const SignUpPage = () => {
     
     // const loginCreateResponse = await fetch(`https:/${API.defaultpath}/login`)
     console.log("Sign In Page")
-    Cookies.remove("jwt");
+    jwt.remove(); // Reinit jwt if manual enter url
 
     const handleLoginSubmit = async (event) =>{
         // disable Default Reload
@@ -32,7 +32,7 @@ const SignUpPage = () => {
         
         const firstname = event.target.firstname.value;
         const lastname = event.target.lastname.value;
-        const birthday = event.target.birthday.value
+        const birthday = event.target.birthday.value || undefined
         const adress = {
             "number": parseInt(event.target.adressNumber.value),
             "street": event.target.street.value,
@@ -65,34 +65,45 @@ const SignUpPage = () => {
 
         // If not error, disable message error
         setLoginError(false) 
-        const SignInResponse = await fetch(`http://${API.defaultpath}/users/signup`, {
+        const SignInFetch = await fetch(`http://${API.defaultpath}/users/signup`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            
-            body: JSON.stringify({ email, password, firstname, username, lastname, adress, phone, birthday}),
-          });
-          if(!SignInResponse.ok && SignInResponse.status >= 500){
+            body: JSON.stringify({ 
+                email, password, firstname, username, lastname, adress, phone, birthday
+            }),
+        });
+        const SignInResponse = await SignInFetch.json()
+        console.log(SignInResponse.status)
+
+        // If Erreur serveur
+        if(!SignInResponse.ok && SignInResponse.status >= 500){
             console.log("erreur serveur")
-            navigate("/")
+            return navigate(`/error/${SignInResponse.status}`);
         }
-          // si la réponse est valide
-          if (SignInResponse.status === 201 || SignInResponse.status === 200) {
-            setErrorMessage("L'utilisateur a été crée")
-            setSucessState(true)
-            setTimeout(() => {
-                navigate("/login");
-              }, "1000")
-            
-          } else {
-            setErrorMessage("L'utilisateur existe déjà")
-            setLoginError(true)
-          }
-        };
+        // If Erreur serveur
+        if(!SignInResponse.ok && SignInResponse.status >= 400){
+            console.log("erreur de données")
+            setErrorMessage("Une valeur est erroné")
+            return navigate(`/error/${SignInResponse.status}`);
+        }
+        // si la réponse est valide
+        if (SignInFetch.status === 201 || SignInFetch.status === 200) {
+        setErrorMessage("L'utilisateur a été crée")
+        setSucessState(true)
+        setTimeout(() => {
+            navigate("/login");
+            }, "1000");
+        } else {
+        setErrorMessage("L'utilisateur existe déjà")
+        console.log(SignInResponse.status)
+        setLoginError(true)
+        }
+    };
     // If Enter into Login Page with jwt remove this
     useEffect(() => {
-        const jwt = Cookies.get("jwt") || null;
+        const jwtData = jwt.data
         if (jwt) {
         }
       }, []);
