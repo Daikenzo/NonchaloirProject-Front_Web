@@ -25,9 +25,9 @@ const LastEventCards = () => {
                                 <p className="description">
                                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt  exercitationem   iste, voluptatum, quia explicabo laboriosam rem adipisci    voluptates cumque,   veritatis atque nostrum corrupti ipsa asperiores harum?   Dicta odio aut hic.
                                 </p>
-                                <a href="#" class="App-link link-dark button">
+                                <a href="#" className="App-link link-dark button">
                                     Voir plus 
-                                    <span class="material-symbols-outlined">
+                                    <span className="material-symbols-outlined">
                                         ->
                                     </span>
                                 </a>

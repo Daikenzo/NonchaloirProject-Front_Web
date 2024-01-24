@@ -19,20 +19,24 @@ const AccountHomePage = () => {
     const [roleColor, setRoleColor] = useState("role-info color-normal")
     const navigate = useNavigate();
     
-    // Disconect
-    const handleLogout = () => {
-        jwt.remove()
-    };
-    // const jwt = Cookies.get("jwt"); //localstorage.getItem("jwt");
-    const user = jwt.get()
-    const ActualUserId = user.id;
-    console.log(ActualUserId)
-
+    // Get User Info
+    const user = jwt.get() //localstorage.getItem("jwt");
+    const ActualUserId = user && user.id;
+    // console.log(ActualUserId)
     const setUsername = (data =>{
         const username = (data.email !== data.username)? data.username : (`${data.firstname} ${data.lastname}`)
         setUserName(username);
     });
+    const CreationDate = userInfo && ( // Conversion de date en format "Day/Month/year HH:MM:SS"
+        new Date(userInfo.createdAt).toLocaleString('fr-FR', { timeZone: 'UTC' })
+    )
 
+   // Disconect
+   const handleLogout = () => {
+        jwt.remove()
+};
+    
+    // Fetch
     const fetchUser = async () => {
         const path= `http://${API.defaultpath}/users`;
         const response = await fetch(`${path}/${id}`, {
@@ -43,7 +47,7 @@ const AccountHomePage = () => {
             return navigate(`error?404`);
         }
         const responseJs = await response.json();
-        console.log(responseJs.data)
+        // console.log(responseJs.data)
         
         // set 
         if (userInfo.email) setUsername(responseJs.data);
@@ -58,11 +62,12 @@ const AccountHomePage = () => {
         setUserPhone(responseJs.data.phone);
         // Set final User Info
         setUserInfo(responseJs.data);
-    };
 
+    };
     
     useEffect(() => {
         fetchUser();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [id]);
 
     
@@ -110,9 +115,10 @@ const AccountHomePage = () => {
                                         <span className="p-2 list-element-item-none">Non renseigné</span>
                                     )}
                                 </li>
-                            <li className="card-info list-group-item"><span className="fw-bolder">Téléphone</span>: <span className="">{userInfo.phone? userInfo.phone: EmptyMessage}</span></li>
+                            <li className="card-info list-group-item"><span className="fw-bolder">Téléphone</span>: <span className="">{userPhone? userPhone: EmptyMessage}</span></li>
                             <li className="card-info list-group-item"><span className="fw-bolder">Adresse Mail</span>: <span className="">{userInfo.email? userInfo.email : EmptyMessage}</span></li>
                             <li className="card-info list-group-item"><span className="fw-bolder">Anniversaire</span>: <span className="">{userInfo.birthday? userInfo.birthday : EmptyMessage}</span></li>
+                            <li className="card-info list-group-item"><span className="fw-bolder">Date d'inscription</span>: <span className="">{CreationDate}</span></li>
                         </ul>
                         {(ActualUserId === parseInt(id)) && <div className="disconnect container">
                             <p><a href={"/"} onClick={handleLogout} alt="Se déconnecter" className="App-link link-danger">Se déconnecter</a></p>

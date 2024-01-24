@@ -43,6 +43,22 @@ const DashboardEventsPage = () => {
                                     </div>
                                 </li>
                                 <li className="text-group">
+                                    <span className="p-2 list-title">Role de la pièce:</span>
+                                    <div className="p-2 list-element-item-none">
+                                        <BtnBoxNav  type={"ActRole"} itemData={"ActRole1"} onlyCreate={true}/>
+                                        <ul className="text-group ActRoles">
+                                            <li itemID="ActRole1" className="text-group">
+                                                <span className="p-2 list-title">Nom du Rôle:</span>
+                                                <span>René</span>
+                                            </li>
+                                            <li itemID="ActRole2" className="text-group">
+                                                <span className="p-2 list-title">Nom du Rôle:</span>
+                                                <span>René</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li className="text-group">
                                     <span className="p-2 list-title">Nom de l'organistateur:</span>
                                     <div className="p-2 list-element-item-none">
                                         <ul className="text-group">

@@ -1,28 +1,21 @@
 import { useParams, useRouteError } from "react-router-dom";
+import { jwt } from "../configs/API_config";
 import HeaderDisplay from "../components/common/Header/HeaderDisplay";
-import {UserDefault, users} from "../debug/sampleBd/users";
 import FooterDisplay from "../components/public/Footer/FooterDisplay";
 import FooterDisplayAdmin from "../components/admin/Footer/FooterDisplayAdmin";
-import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
 
 const ErrorPage = ({error, dashboard}) => {
+    // Init Param & UserData
     const {id} = useParams();
-    const jwt = Cookies.get("jwt");
-    const userData = jwt? (jwtDecode(jwt).data) :  (null);
-    console.log(userData)
-    //Error Type Value (404: Not Found) / 403 :Forbiden
-    console.log(error)
+    const userData = jwt.get();
     // Get & Set Error
     const getError = {
         status: id || error
     }
-    if (getError.status instanceof Number){
+    if (getError.status instanceof Number){ // Convert Status into Number
         error = getError.status
-    } else{
-        error = parseInt(getError.status)
+    } else{ error = parseInt(getError.status)
     }
-    
     // Set Error Info Data
     if (error >= 400){
         getError.message = "Erreur de donnée client";
@@ -45,9 +38,9 @@ const ErrorPage = ({error, dashboard}) => {
         getError.status = error
     }
     // If a non admin open dashboard, transform any error into 403
-    if (!userData || (userData.role < 4)){
-        if (dashboard){ error = 403} else { error = 404}
-    }
+        if (!userData || (userData.role < 4)){
+            if (dashboard){ error = 403} else { error = 404}
+        }
     // Display
     return (
         <>
@@ -62,5 +55,5 @@ const ErrorPage = ({error, dashboard}) => {
         </>
     )
 };
-
+// Export
 export default ErrorPage;

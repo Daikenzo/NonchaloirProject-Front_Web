@@ -16,8 +16,7 @@ const HeaderDisplay = ({dashboard=false}) => {
     const [isconnected, setUserLoginStatut] = useState(false);
     // Get JWT Token
     const userData = jwt.get();
-    console.log("je lance le header")
-
+    // console.log("je lance le header")
     useEffect(() => {
         if (userData){
             setUserLoginStatut(true)

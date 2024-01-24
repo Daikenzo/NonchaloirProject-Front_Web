@@ -27,6 +27,7 @@ import AdminContactsMessagePage from "./pages/admin/Contacts/AdminContactsMessag
 import DashboardUsersCreatePage from "./pages/admin/Users/AdminCreateUsersPage"
 import ReservationListPage from "./pages/admin/Events/Reservations/ReservationsPage";
 import ReservationListByEventPage from "./pages/admin/Events/Reservations/ReservationsByEventPage";
+import DashboardUpdateUserPage from "./pages/admin/Users/AdminUpdateUsersPage";
 // Main
 function App() {
   //  console.log(users)
@@ -60,12 +61,15 @@ function App() {
         <Route path="/dashboard/reservations" element={<ReservationListPage/>}/>
         <Route path="/dashboard/users" element={<DashboardUsersPage/>}/>
         <Route path="/dashboard/users/create" element={<DashboardUsersCreatePage/>}/>
+        <Route path="/dashboard/users/:id/" element={<DashboardUpdateUserPage/>}/>
+        <Route path="/dashboard/users/:id/update" element={<DashboardUpdateUserPage/>}/>
         <Route path="/dashboard/notifications" element={<AdminContactsMessagePage/>}/>
 
         <Route path="/debug" element={<DebugHome/>}/>
         
-        <Route path="/dashboard/*" element={<ErrorPage dashboard={true} error={404}/>} />
         <Route path="error/:id" element={<ErrorPage error={setStatus(error)}/>} />
+        <Route path="/dashboard/error/:id" element={<ErrorPage dashboard={true} error={setStatus(error)}/>} />
+        <Route path="/dashboard/*" element={<ErrorPage dashboard={true} error={404}/>} />
         <Route path="*" element={<ErrorPage error={setStatus(404)}/>} />
       </Routes>
     </BrowserRouter>

@@ -5,10 +5,7 @@ import { users, UserDefault } from '../../../debug/sampleBd/users';
 import {API, getResponse, jwt} from '../../../configs/API_config';
 import FooterDisplay from '../../../components/public/Footer/FooterDisplay';
 import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
 import { Link, redirect, useNavigate } from 'react-router-dom';
-Cookies.ExpireIn = 60 * 60; // Minute * Second
 const debug = true;
 
 const LoginPage = ({sucessState = false}) => {
@@ -65,9 +62,6 @@ const LoginPage = ({sucessState = false}) => {
 
           const loginResponse = getResponse(loginFetch)
 
-          
-          
-
           if(!loginResponse.ok && loginResponse.status >= 500){
             console.log("erreur serveur")
             return navigate(`/error/${500}`);
@@ -77,7 +71,6 @@ const LoginPage = ({sucessState = false}) => {
             
             // je récupère le jwt dans le data e
             const loginData = await loginResponse.data
-            console.log("teste", loginData)
             // Get User Data and expire Token
             const user = loginData
             // Create & Set Jwt Cookie

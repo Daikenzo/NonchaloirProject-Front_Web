@@ -1,4 +1,9 @@
 {
+    "400":{
+        "status":400,
+        "message":"Erreur de donnée client",
+        "decribe":"Un soucis est survenu lors de la validation des données"
+    },
     "404":{
         "status":404,
         "message":"Page non trouvée",
@@ -16,7 +21,7 @@
     },
     "500":{
         "status":500,
-        "message":"Serveur Error",
-        "describe":"Un problème serveur est survenue. Veuillez revenir plus tard."
+        "message":"Erreur Serveur",
+        "describe":"Une erreur est survenue côté serveur. Veuillez revenir plus tard."
     }
 }
