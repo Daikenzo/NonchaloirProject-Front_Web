@@ -18,6 +18,13 @@ const HeaderDisplay = ({dashboard=false}) => {
     const userData = jwt.get();
     // console.log("je lance le header")
     useEffect(() => {
+        jwt.get()
+        
+        if(dashboard && !jwt.get()){
+            return navigate("/")
+        }
+            
+
         if (userData){
             setUserLoginStatut(true)
             if(dashboard && userData.role < 3){

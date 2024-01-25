@@ -1,8 +1,20 @@
 import HeaderDisplay from "../../../components/common/Header/HeaderDisplay"
 import FooterDisplay from "../../../components/admin/Footer/FooterDisplayAdmin";
 import BtnBoxNav from "../../../components/admin/Btn/BtnBoxNav";
+import { useEffect } from "react";
+import { jwt } from "../../../configs/API_config";
+import { useNavigate } from "react-router-dom";
+// import { API } from "../../../configs/API_config";
 
 const DashboardUsersPage = () => {
+    const navigate = useNavigate();
+    // If Enter into Login Page with jwt remove this
+    useEffect(() => {
+        if(!jwt.get()){
+            navigate("/")
+        }
+        
+      });
     // Display
     return (
         <>
@@ -13,7 +25,7 @@ const DashboardUsersPage = () => {
                 </section>
                 <section className="container eventlist-section">
                     <h3 className="">Listes des Utilisateurs</h3>
-                    <BtnBoxNav  type={"CreateUser"} itemData={"users"} onlyCreate={true}/>
+                    <BtnBoxNav  type={"CreateUser"} itemData={"users"} CreateFetch="/dashboard/users/create" onlyCreate={true}/>
                     <div className="event-content card">
                     <div className="card-header text-white bg-danger">
                             <h4 className="event-name">Utilisateur n°<span>1</span></h4>

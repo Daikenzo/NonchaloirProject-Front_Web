@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import BtnSendBoxNav from "../../../components/admin/Btn/BtnSendBoxNav";
 
 const DashboardUpdateUserPage = () => {
     // Init
@@ -24,89 +25,82 @@ const DashboardUpdateUserPage = () => {
     const fetchUser = async () => {
         const responseCoworking = await fetch(`http://${API.defaultpath}/users/${id}`);
         const responseCoworkingJs = await responseCoworking.json();
-        console.log(responseCoworkingJs)
+        // console.log(responseCoworkingJs)
         
         setUserInfo(responseCoworkingJs.data);
-        console.log("a")
       };
+      const handleUpdateUser = async (event) =>{
+      // disable Default Reload
+      event.preventDefault();
+      // Get Signup Info
+      const email = event.target.email.value; // Identifiant used: email
+      const password = event.target.password.value;
+      // const passwordConfirm = event.target.passwordConfirm.value;
+      const username = (event.target.username.value || event.target.username.value !== "")? event.target.username.value : event.target.email.value;
+      
+      const firstname = event.target.firstname.value;
+      const lastname = event.target.lastname.value;
+      const birthday = event.target.birthday.value? event.target.birthday.value : null
+      const RoleId = parseInt(event.target.roleId.value);
+      const adress = {
+          "number": parseInt(event.target.adressNumber.value),
+          "street": event.target.street.value,
+          "postcode": parseInt(event.target.postcode.value),
+          "city": event.target.city.value
+      }
+      const phone = event.target.phone.value || null;
+      // Verification Empty form - return error if empty
+      if (email === ''  || firstname === '' ) {
+          setStateMessage("Les champs ne peux pas être vide")
+          console.log(email, password, firstname)
+          return setLoginError(true)
+      }
+      // Check verification Info
+      // Invalid Value
+      if((username.split(' ').join('') !== username)
+          || (firstname.split(' ').join('') !== firstname)
+          || (lastname.split(' ').join('') !== lastname)
+      ){
+          setStateMessage("Saisie Incorecte")
+          return setLoginError(true)
+      }
+      if(RoleId <1 || RoleId > 5) {
+          setStateMessage("Saisie Incorecte");
+          return setLoginError(true);
+      } 
 
+      // If not error, disable message error
+      setLoginError(false) 
 
-    const handleUpdateUser = async (event) =>{
-        // disable Default Reload
-        event.preventDefault();
-        // Get Signup Info
-        const email = event.target.email.value; // Identifiant used: email
-        const password = event.target.password.value;
-        // const passwordConfirm = event.target.passwordConfirm.value;
-        const username = (event.target.username.value || event.target.username.value !== "")? event.target.username.value : event.target.email.value;
-        
-        const firstname = event.target.firstname.value;
-        const lastname = event.target.lastname.value;
-        const birthday = event.target.birthday.value? event.target.birthday.value : null
-        const RoleId = parseInt(event.target.roleId.value);
-        const adress = {
-            "number": parseInt(event.target.adressNumber.value),
-            "street": event.target.street.value,
-            "postcode": parseInt(event.target.postcode.value),
-            "city": event.target.city.value
+      const token = Cookies.get("jwt");
+      // console.log(email, password, firstname, username, lastname, adress, phone, birthday, RoleId)
+      const SignInResponse = await fetch(`http://${API.defaultpath}/users/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          
+          body: JSON.stringify({ email, firstname, password, username, lastname, adress, phone, birthday, RoleId}),
+        });
+        if(!SignInResponse.ok && SignInResponse.status >= 500){
+          console.log("erreur serveur")
+          navigate(`/dashboard/error/${SignInResponse.status}`)
+      }
+        // si la réponse est valide
+        if (SignInResponse.status === 201 || SignInResponse.status === 200) {
+          setStateMessage("L'utilisateur a été Modifié")
+          setSucessState(true)
+          setTimeout(() => {
+              navigate("/dashboard/users");
+            }, "1000")
+          
+        } else {
+          setStateMessage("L'utilisateur existe déjà")
+          // console.log(SignInResponse  )
+          setLoginError(true)
         }
-        const phone = event.target.phone.value || null;
-        // Verification Empty form - return error if empty
-        if (email === ''  || firstname === '' ) {
-            setStateMessage("Les champs ne peux pas être vide")
-            console.log(email, password, firstname)
-            return setLoginError(true)
-        }
-        // Check verification Info
-        // Invalid Value
-        if((username.split(' ').join('') !== username)
-            || (firstname.split(' ').join('') !== firstname)
-            || (lastname.split(' ').join('') !== lastname)
-        ){
-            setStateMessage("Saisie Incorecte")
-            return setLoginError(true)
-        }
-        if(RoleId <1 || RoleId > 5) {
-            setStateMessage("Saisie Incorecte");
-            return setLoginError(true);
-        } 
-
-        // If not error, disable message error
-        setLoginError(false) 
-
-        const token = Cookies.get("jwt");
-        // console.log(email, password, firstname, username, lastname, adress, phone, birthday, RoleId)
-        const SignInResponse = await fetch(`http://${API.defaultpath}/users/${id}`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            
-            body: JSON.stringify({ email, firstname, username, lastname, adress, phone, birthday, RoleId}),
-          });
-          if(!SignInResponse.ok && SignInResponse.status >= 500){
-            console.log("erreur serveur")
-            navigate("*")
-        }
-          // si la réponse est valide
-          if (SignInResponse.status === 201 || SignInResponse.status === 200) {
-            setStateMessage("L'utilisateur a été crée")
-            setSucessState(true)
-            setTimeout(() => {
-                navigate("/dashboard/users");
-              }, "1000")
-            
-          } else {
-            setStateMessage("L'utilisateur existe déjà")
-            console.log(SignInResponse  )
-            setLoginError(true)
-          }
-        };
-
-        const handleCancel = () => {
-            navigate("/dashboard/users")
-        }
+      };
     // If Enter into Login Page with jwt remove this
         useEffect(() => {
         if (!Cookies.get("jwt")) {
@@ -126,17 +120,12 @@ const DashboardUpdateUserPage = () => {
             <HeaderDisplay dashboard={true} />
             <main  className="App-main main-container">
                 <section className="container title-section">
-                    <h2 className="App-title">Dashboard / Utilisateurs / {id} / Update</h2>
+                    <h2 className="App-title">Dashboard / Utilisateurs / {id}</h2>
                 </section>
                 <section className="container subtitle-section">
-                    <h3 className="">Nouveau Utilisateur</h3>
+                    <h3 className="">Modification de l'utilisateur n°{id}</h3>
                     <div className="event-btnbox p-2 d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" onClick={handleUpdateUser} className="btn btn-outline-success">
-                            Envoyer
-                        </button>
-                        <button type="button" onClick={handleCancel} className="btn btn-outline-danger">
-                            Annuler
-                        </button>
+                        <BtnSendBoxNav CancelFetch={"/dashboard/users"}/>
                     </div>
                     <form  onSubmit={handleUpdateUser} className="card card-body ContactForm App-form p-2">
                         <div className="form-item item-group input-group form-control">
@@ -149,11 +138,11 @@ const DashboardUpdateUserPage = () => {
                         </div>
                         <div className="form-item input-group form-control">
                             <label htmlFor="email" className="input-group-text">Email</label>
-                            <input name="email" id="email" defaultValue={user && user.email} type="text" className="input-group-text flex-fill" disable/>
+                            <input name="email" disabled id="email" defaultValue={user && user.email} type="text" className="input-group-text flex-fill"/>
                         </div>
                         <div className="form-item item-group input-group form-control">
                             <label htmlFor="password" className="input-group-text">Mot de passe</label>
-                            <input name="password" id="password" type="password" defaultValue={user && user.password} className="input-group-text flex-fill" disabled/>
+                            <input name="password" id="password" type="password" defaultValue={user && user.psw} className="input-group-text flex-fill"/>
                         </div>
                         <div className="form-item input-group form-control">
                             <label htmlFor="roleId" className="input-group-text">Role d'aminsistration/Type D'adhésion</label>

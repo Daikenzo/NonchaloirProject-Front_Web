@@ -7,9 +7,8 @@ import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import { Link, useNavigate } from 'react-router-dom';
-import BtnSendBoxNav from "../../../components/admin/Btn/BtnSendBoxNav";
 
-const DashboardUsersCreatePage = () => {
+const DashboardEventsCreatePage = () => {
     // Init
     const navigate = useNavigate();
     // Set Default State
@@ -18,8 +17,10 @@ const DashboardUsersCreatePage = () => {
     const [LoginSuccess, setSucessState] = useState(false);
     const [stateMessage, setStateMessage] = useState("Les informations sont incorrectes");
     // Check and Get UserRoleId
-    
+    console.log(jwt)
+
     const ActualUserId = jwt.data? jwt.get().role : 0;
+    console.log()
 
     const handleOnChangeRequired = async (event) =>{
         event.preventDefault();
@@ -40,16 +41,16 @@ const DashboardUsersCreatePage = () => {
         // Get Signup Info
         console.log(event.target.email.value)
         const email = event.target.email.value; // Identifiant used: email
-        const password = event.target.password.value;
         // const passwordConfirm = event.target.passwordConfirm.value;
         const username = (
                 event.target.username.value || event.target.username.value !== "")? event.target.username.value : (
                 event.target.email.value
             );
         
-        const firstname = event.target.firstname.value;
-        const lastname = event.target.lastname.value;
-        const birthday = event.target.birthday.value? event.target.birthday.value : null
+        const eventName = event.target.name.value;
+        const description = event.target.describe.value;
+        const creationDate = event.target.creationDate.value? event.target.creationDate.value : null
+        const eventDate = event.target.creationDate.value;
         const RoleId = parseInt(event.target.roleId.value);
         const adress = {
             "number": parseInt(event.target.adressNumber.value),
@@ -69,27 +70,26 @@ const DashboardUsersCreatePage = () => {
                 setAdressRequired(true)
             }
         }
-
         console.log(adressRequired, "a", isNaN(adress.number))
         const phone = event.target.phone.value || null;
-        console.log(password)
+        console.log("")
         // Verification Empty form - return error if empty
         console.log("teste", adress)
-        if (email === '' || password === '' || firstname === '' 
+        if (eventName === '' || description || eventDate === ""
             || ((adress.number !==  isNaN() || adress.street !== '' || adress.postcode !== isNaN() || adress.city !== '') 
             && (
                 adress.street === '' || adress.city === '' || adress.postcode === '')
                 )
             ) {
             setStateMessage("Les champs ne peux pas être vide")
-            console.log(email, password, firstname)
+            console.log(description, eventName)
             return setLoginError(true)
         }
         // Check verification Info
         // Invalid Value
         if((username.split(' ').join('') !== username)
-            || (firstname.split(' ').join('') !== firstname)
-            || (lastname.split(' ').join('') !== lastname)
+            || (eventName.split(' ').join('') !== eventName)
+            || (description.split(' ').join('') !== description)
         ){
             setStateMessage("Saisie Incorecte")
             return setLoginError(true)
@@ -102,14 +102,14 @@ const DashboardUsersCreatePage = () => {
         // If not error, disable message error
         setLoginError(false) 
 
-        console.log(email, password, firstname, username, lastname, adress, phone, birthday, RoleId)
-        const SignInResponse = await fetch(`http://${API.defaultpath}/users}`, {
+        console.log(email, eventName, username, description, adress, phone, creationDate, eventDate, RoleId)
+        const SignInResponse = await fetch(`http://${API.defaultpath}/users/signup`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             
-            body: JSON.stringify({ email, password, firstname, username, lastname, adress, phone, birthday, RoleId}),
+            body: JSON.stringify({ email, eventName, username, description, adress, phone, creationDate, RoleId}),
           });
           if(!SignInResponse.ok && SignInResponse.status >= 500){
             console.log("erreur serveur")
@@ -117,23 +117,30 @@ const DashboardUsersCreatePage = () => {
         }
           // si la réponse est valide
           if (SignInResponse.status === 201 || SignInResponse.status === 200) {
-            setStateMessage("L'utilisateur a été crée")
+            setStateMessage("L'évènement a été crée")
             setSucessState(true)
             setTimeout(() => {
-                navigate("/dashboard/users");
+                navigate("/dashboard/events");
               }, "1000")
             
           } else {
-            setStateMessage("L'utilisateur existe déjà")
+            setStateMessage("L'évènement existe déjà")
             console.log(SignInResponse  )
             setLoginError(true)
           }
         };
 
         const handleCancel = () => {
-            navigate("/dashboard/users")
+            navigate("/dashboard/events")
         }
-    
+    // If Enter into Login Page with jwt remove this
+    useEffect(() => {
+        if(!jwt.data){
+            console.log("a")
+            navigate("/")
+        }
+        
+      }, []);
 
     // Display
     return (
@@ -141,46 +148,43 @@ const DashboardUsersCreatePage = () => {
             <HeaderDisplay dashboard={true} />
             <main  className="App-main main-container">
                 <section className="container title-section">
-                    <h2 className="App-title">Dashboard / Utilisateurs</h2>
+                    <h2 className="App-title">Dashboard / Spectacles & Evenement / Create</h2>
                 </section>
                 <section className="container subtitle-section">
                     <h3 className="">Nouveau Utilisateur</h3>
                     
                     <form  onSubmit={handleCreateUser} className="card card-body ContactForm App-form p-2">
-                        <BtnSendBoxNav CancelFetch={"/dashboard/users"}/>
-                        <div className="form-item item-group input-group form-control">
-                            <label htmlFor="firstname" className="input-group-text">Prénom</label>
-                            <input name="firstname" id="firstname" type="text"className="input-group-text flex-fill" required/>
+                        <div className="event-btnbox p-2 d-grid gap-2 d-md-flex justify-content-md-end">
+                            <input className="btn btn-outline-success" alt="send" type="submit"/>
+                            <button type="button" onClick={handleCancel} className="btn btn-outline-danger">
+                                Annuler
+                            </button>
                         </div>
                         <div className="form-item item-group input-group form-control">
-                            <label htmlFor="lastname" className="input-group-text">Nom</label>
-                            <input name="lastname" id="lastname" type="text"className="input-group-text flex-fill" required/>
+                            <label htmlFor="name" className="input-group-text">Nom de l'évènement</label>
+                            <input name="name" id="name" type="text"className="input-group-text flex-fill" required/>
+                        </div>
+                        <div className="form-item item-group input-group form-control">
+                            <label htmlFor="describe" className="input-group-text">Description</label>
+                            <textarea name="describe" id="describe" type="text"className="input-group-text flex-fill" required/>
+                        </div>
+                        
+                        <div className="form-item item-group input-group form-control">
+                            <label htmlFor="eventDate" className="input-group-text">Date de représentation</label>
+                            <input name="eventDate" id="birthay" type="date" className="input-group-text flex-fill"/>
                         </div>
                         <div className="form-item input-group form-control">
-                            <label htmlFor="email" className="input-group-text">Email</label>
-                            <input name="email" id="email" type="text" className="input-group-text flex-fill" required/>
-                        </div>
-                        <div className="form-item item-group input-group form-control">
-                            <label htmlFor="password"className="input-group-text">Mot de passe</label>
-                            <input name="password" id="password" autoComplete="section-red" type="password" className="input-group-text flex-fill" required/>
-                        </div>
-                        <div className="form-item input-group form-control">
-                            <label htmlFor="roleId" className="input-group-text">Role d'aminsistration/Type D'adhésion</label>
-                            <select name="roleId" id="roleId" typeof="list" className="input-group-text flex-fill" defaultValue={1} required>
+                            <label htmlFor="roleId" className="input-group-text">Type D'évènement</label>
+                            <select name="roleId" id="roleId" typeof="list" className="input-group-text flex-fill" defaultValue={0} required>
                                 <option value="">Sélectionne un role...</option>
-                                <option value="1">Non Adhérent</option>
-                                <option value="2">Adherent Spectacteur / Soutiens</option>
-                                <option value="3">Adherent Atelier</option>
-                                {ActualUserId === 5 && <>
-                                <option value="4">Editeur</option>
-                                <option value="5">Admin</option>
-                                </>}
+                                <option value="1">Spectacle</option>
+                                <option value="2">Évènement</option>
                             </select>
                         </div>
 
                         <div className="form-item item-group input-group form-control">
-                            <label htmlFor="birthday" className="input-group-text">Date de naissance</label>
-                            <input name="birthday" id="birthay" type="date" className="input-group-text flex-fill"/>
+                            <label htmlFor="creationDate" className="input-group-text">Date de création</label>
+                            <input name="creationDate" id="birthay" type="date" className="input-group-text flex-fill"/>
                         </div>
                         <div className="form-item item-group input-group form-control">
                             <label htmlFor="username" className="input-group-text">Pseudonyme</label>
@@ -216,6 +220,10 @@ const DashboardUsersCreatePage = () => {
                                     )}
                                 </div>
                             </div>
+                            <div className="form-item input-group form-control">
+                                <label htmlFor="email" className="input-group-text">Email</label>
+                                <input name="email" id="email" type="text" className="input-group-text flex-fill" required/>
+                            </div>
 
                             <div className="form-item item-group input-group form-control">
                                 <label htmlFor="phone" className="input-group-text">Téléphone</label>
@@ -244,4 +252,4 @@ const DashboardUsersCreatePage = () => {
     );
 };
 
-export default DashboardUsersCreatePage;
+export default DashboardEventsCreatePage;

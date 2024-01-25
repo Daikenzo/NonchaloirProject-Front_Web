@@ -19,17 +19,17 @@ const DashBoardPage = () => {
                     <h2 className="App-title">Dashboard</h2>
                 </div>
                 <section className="dashboard-info">
-                    <div class="grid">
+                    <div className="grid">
                       <Link className=" text-decoration-none" to="/dashboard/users">
-                        <div class="card dashboard-info-card">
-                          <span class="icon">
+                        <div className="card dashboard-info-card">
+                          <span className="icon">
                               <svg
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
-                                stroke-width="1.2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeWidth="1.2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 xmlns="http://www.w3.org/2000/svg"
                               >
                                 <path
@@ -48,32 +48,32 @@ const DashBoardPage = () => {
                           <p>
                           Les utilisateurs enregistrés.
                           </p>
-                          <div class="shine"></div>
-                          <div class="background">
-                            <div class="tiles">
-                              <div class="tile tile-1"></div>
-                              <div class="tile tile-2"></div>
-                              <div class="tile tile-3"></div>
-                              <div class="tile tile-4"></div>
+                          <div className="shine"></div>
+                          <div className="background">
+                            <div className="tiles">
+                              <div className="tile tile-1"></div>
+                              <div className="tile tile-2"></div>
+                              <div className="tile tile-3"></div>
+                              <div className="tile tile-4"></div>
                       
-                              <div class="tile tile-5"></div>
-                              <div class="tile tile-6"></div>
-                              <div class="tile tile-7"></div>
-                              <div class="tile tile-8"></div>
+                              <div className="tile tile-5"></div>
+                              <div className="tile tile-6"></div>
+                              <div className="tile tile-7"></div>
+                              <div className="tile tile-8"></div>
                       
-                              <div class="tile tile-9"></div>
-                              <div class="tile tile-10"></div>
+                              <div className="tile tile-9"></div>
+                              <div className="tile tile-10"></div>
                             </div>
                       
-                            <div class="line line-1"></div>
-                            <div class="line line-2"></div>
-                            <div class="line line-3"></div>
+                            <div className="line line-1"></div>
+                            <div className="line line-2"></div>
+                            <div className="line line-3"></div>
                           </div>
                         </div>
                       </Link>
                       <Link className=" text-decoration-none" to="/dashboard/events">
-                        <div class="card dashboard-info-card">
-                          <span class="icon">
+                        <div className="card dashboard-info-card">
+                          <span className="icon">
                             <img src={UserIco} alt="" />
                           </span>
                           <h4 className=" text-black">Spectacles & Evenements</h4>
@@ -81,39 +81,39 @@ const DashBoardPage = () => {
                             La liste des Spectacles, des évènements.
                             Inclus également les réalisations
                           </p>
-                          <div class="shine"></div>
-                          <div class="background">
-                            <div class="tiles">
-                              <div class="tile tile-1"></div>
-                              <div class="tile tile-2"></div>
-                              <div class="tile tile-3"></div>
-                              <div class="tile tile-4"></div>
+                          <div className="shine"></div>
+                          <div className="background">
+                            <div className="tiles">
+                              <div className="tile tile-1"></div>
+                              <div className="tile tile-2"></div>
+                              <div className="tile tile-3"></div>
+                              <div className="tile tile-4"></div>
                       
-                              <div class="tile tile-5"></div>
-                              <div class="tile tile-6"></div>
-                              <div class="tile tile-7"></div>
-                              <div class="tile tile-8"></div>
+                              <div className="tile tile-5"></div>
+                              <div className="tile tile-6"></div>
+                              <div className="tile tile-7"></div>
+                              <div className="tile tile-8"></div>
                       
-                              <div class="tile tile-9"></div>
-                              <div class="tile tile-10"></div>
+                              <div className="tile tile-9"></div>
+                              <div className="tile tile-10"></div>
                             </div>
                       
-                            <div class="line line-1"></div>
-                            <div class="line line-2"></div>
-                            <div class="line line-3"></div>
+                            <div className="line line-1"></div>
+                            <div className="line line-2"></div>
+                            <div className="line line-3"></div>
                           </div>
                         </div>
                       </Link>
                       <Link className=" text-decoration-none" to="/dashboard/reservations">
-                        <div class="card dashboard-info-card">
-                          <span class="icon">
+                        <div className="card dashboard-info-card">
+                          <span className="icon">
                             <svg
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
-                              stroke-width="1.2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
+                              strokeWidth="1.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -125,41 +125,41 @@ const DashBoardPage = () => {
                           <p>
                             La liste des réservations des Spectacles
                           </p>
-                          <div class="shine"></div>
-                          <div class="background">
-                            <div class="tiles">
-                              <div class="tile tile-1"></div>
-                              <div class="tile tile-2"></div>
-                              <div class="tile tile-3"></div>
-                              <div class="tile tile-4"></div>
+                          <div className="shine"></div>
+                          <div className="background">
+                            <div className="tiles">
+                              <div className="tile tile-1"></div>
+                              <div className="tile tile-2"></div>
+                              <div className="tile tile-3"></div>
+                              <div className="tile tile-4"></div>
                       
-                              <div class="tile tile-5"></div>
-                              <div class="tile tile-6"></div>
-                              <div class="tile tile-7"></div>
-                              <div class="tile tile-8"></div>
+                              <div className="tile tile-5"></div>
+                              <div className="tile tile-6"></div>
+                              <div className="tile tile-7"></div>
+                              <div className="tile tile-8"></div>
                       
-                              <div class="tile tile-9"></div>
-                              <div class="tile tile-10"></div>
+                              <div className="tile tile-9"></div>
+                              <div className="tile tile-10"></div>
                             </div>
                       
-                            <div class="line line-1"></div>
-                            <div class="line line-2"></div>
-                            <div class="line line-3"></div>
+                            <div className="line line-1"></div>
+                            <div className="line line-2"></div>
+                            <div className="line line-3"></div>
                           </div>
                         </div>
                       </Link>
 
                       {userRole >=5 && (
                         <Link className=" text-decoration-none" to="/dashboard/notifications">
-                        <div class="card dashboard-info-card">
-                          <span class="icon">
+                        <div className="card dashboard-info-card">
+                          <span className="icon">
                             <svg
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
-                              stroke-width="1.2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
+                              strokeWidth="1.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
@@ -171,26 +171,26 @@ const DashBoardPage = () => {
                           <p>
                             Les messages laissées par le formulaire de contatc
                           </p>
-                          <div class="shine"></div>
-                          <div class="background">
-                            <div class="tiles">
-                              <div class="tile tile-1"></div>
-                              <div class="tile tile-2"></div>
-                              <div class="tile tile-3"></div>
-                              <div class="tile tile-4"></div>
+                          <div className="shine"></div>
+                          <div className="background">
+                            <div className="tiles">
+                              <div className="tile tile-1"></div>
+                              <div className="tile tile-2"></div>
+                              <div className="tile tile-3"></div>
+                              <div className="tile tile-4"></div>
                       
-                              <div class="tile tile-5"></div>
-                              <div class="tile tile-6"></div>
-                              <div class="tile tile-7"></div>
-                              <div class="tile tile-8"></div>
+                              <div className="tile tile-5"></div>
+                              <div className="tile tile-6"></div>
+                              <div className="tile tile-7"></div>
+                              <div className="tile tile-8"></div>
                       
-                              <div class="tile tile-9"></div>
-                              <div class="tile tile-10"></div>
+                              <div className="tile tile-9"></div>
+                              <div className="tile tile-10"></div>
                             </div>
                       
-                            <div class="line line-1"></div>
-                            <div class="line line-2"></div>
-                            <div class="line line-3"></div>
+                            <div className="line line-1"></div>
+                            <div className="line line-2"></div>
+                            <div className="line line-3"></div>
                           </div>
                         </div>
                       </Link>)}

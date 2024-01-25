@@ -49,7 +49,7 @@ const jwt ={
     },
     get: () =>{ // Get Jwt Cookie
         const jwt = Cookies.get("jwt");
-        console.log("get");
+        // console.log("get");
         const decodedJwt = jwt? (jwtDecode(jwt).data) : (null);
         return decodedJwt
     },

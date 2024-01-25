@@ -6,6 +6,7 @@ import HeaderDisplay from "../../components/common/Header/HeaderDisplay";
 import FooterDisplay from "../../components/public/Footer/FooterDisplay";
 import WebsiteTitleSection from "../../components/public/Title/TitleSection";
 import LastEventCards from "../../components/public/Events/LastEvent/LastEventCards";
+import CitationSection from "../../components/public/Citation/CitationSection";
 
 const HomePage = () => {
 
@@ -21,13 +22,7 @@ const HomePage = () => {
                 <WebsiteTitleSection />
                 <LastEventCards />  
 
-                <section className="p-3 container w-50 container citation-box">
-                    <div className="citation fst-italic">
-                        <p className="citation-text">Elle aimes aussi la paix, les champs. l'air froid du soir</p>
-                        <p className="citation-text">Un penser calme et fort, mêlé de Nonchaloir"</p>
-                    </div>
-                    <div className="m-2 citation-author Bold">Sainte-Beuve</div>
-                </section>
+                <CitationSection />
 
                 <section className="p-3 w-75 container discover">
                     <h2 className="card-title discover text-uppercase text-underline">Découvrez la nonchalance de l'artiste comédien</h2>

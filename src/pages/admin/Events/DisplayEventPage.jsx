@@ -14,7 +14,7 @@ const DashboardEventsPage = () => {
                 </section>
                 <section className="container eventlist-section">
                     <h3>Listes des évènements</h3>
-                    <BtnBoxNav  type={"events"} itemData={"events"} onlyCreate={true}/>
+                    <BtnBoxNav  type={"events"} itemData={"events"} CreateFetchData="/dashboard/events/create" onlyCreate={true}/>
                     <div className="event-content card">
                         <div className="card-header bg-danger">
                             <h4 className="event-name text-white">Nom de l'évènement</h4>
@@ -42,22 +42,7 @@ const DashboardEventsPage = () => {
                                         </ul>
                                     </div>
                                 </li>
-                                <li className="text-group">
-                                    <span className="p-2 list-title">Role de la pièce:</span>
-                                    <div className="p-2 list-element-item-none">
-                                        <BtnBoxNav  type={"ActRole"} itemData={"ActRole1"} onlyCreate={true}/>
-                                        <ul className="text-group ActRoles">
-                                            <li itemID="ActRole1" className="text-group">
-                                                <span className="p-2 list-title">Nom du Rôle:</span>
-                                                <span>René</span>
-                                            </li>
-                                            <li itemID="ActRole2" className="text-group">
-                                                <span className="p-2 list-title">Nom du Rôle:</span>
-                                                <span>René</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
+                                
                                 <li className="text-group">
                                     <span className="p-2 list-title">Nom de l'organistateur:</span>
                                     <div className="p-2 list-element-item-none">
@@ -84,7 +69,7 @@ const DashboardEventsPage = () => {
                                     </p>
                                 </li>
                                 <li className="text-group">
-                                    <span className="p-2 list-title">DDate de création:</span>
+                                    <span className="p-2 list-title">Date de création:</span>
                                     <span className="p-2">10 Mai 2023</span>
                                 </li>
                                 <li className="text-group">
@@ -96,6 +81,31 @@ const DashboardEventsPage = () => {
                                     <span className="p-2">Odd delarovia</span>
                                 </li>
                                 <li className="text-group">
+                                    <span className="p-2 list-title">Distribution des rôles:</span>
+                                    <div className="p-2 list-element-item-none">
+                                        <BtnBoxNav  type={"ActRole"} itemData={"ActRole1"} onlyCreate={true}/>
+                                        <ul className="text-group ActRoles">
+                                            <li itemID="ActRole1" className="text-group">
+                                                <div className="p-2 list-title">Role N°1:</div>
+                                                <BtnBoxNav  type={"ActRole-Item"} itemData={"ActRole1-role1"}/>
+                                                <ul className="text-group">
+                                                    <li><span>Madame mangin</span>: <span>William nat</span></li>
+                                                    <li><span>Sisi</span>: <span>Odd Delarovia</span></li>
+                                                </ul>
+                                            </li>
+                                            <li itemID="ActRole2" className="text-group">
+                                                <div className="p-2 list-title">Role N°2:</div>
+                                                <BtnBoxNav  type={"ActRole-Item"} itemData={"ActRole1-role2"}/>
+                                                <ul className="text-group">
+                                                    <li><span>Madame mangin</span>: <span>William nat</span></li>
+                                                    <li><span>Sisi</span>: <span>Odd Delarovia</span></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li className="text-group" itemID="ActRole-1">
+                                    
                                     <span className="p-2 list-title">Distribution des rôles:</span>
                                     <div className="p-2 list-element-item-none">
                                         <ul className="text-group">

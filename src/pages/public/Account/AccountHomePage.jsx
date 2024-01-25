@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import './AccountHome.scss';
 import setPhone from "../../../components/common/phone/PhoneFormater";
+import { getDate } from "../../../configs/WebServer_config";
 
 const AccountHomePage = () => {
     // Init
@@ -18,9 +19,9 @@ const AccountHomePage = () => {
     const [userPhone, setUserPhone] = useState("")
     const [roleColor, setRoleColor] = useState("role-info color-normal")
     const navigate = useNavigate();
-    
     // Get User Info
     const user = jwt.get() //localstorage.getItem("jwt");
+
     const ActualUserId = user && user.id;
     // console.log(ActualUserId)
     const setUsername = (data =>{
@@ -28,14 +29,12 @@ const AccountHomePage = () => {
         setUserName(username);
     });
     const CreationDate = userInfo && ( // Conversion de date en format "Day/Month/year HH:MM:SS"
-        new Date(userInfo.createdAt).toLocaleString('fr-FR', { timeZone: 'UTC' })
+        getDate.all(userInfo.createdAt)
     )
-
    // Disconect
    const handleLogout = () => {
         jwt.remove()
 };
-    
     // Fetch
     const fetchUser = async () => {
         const path= `http://${API.defaultpath}/users`;
@@ -66,15 +65,13 @@ const AccountHomePage = () => {
     };
     
     useEffect(() => {
+        jwt.get()
         fetchUser();
+       
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [id]);
-
-    
-    
     // display
     return (
-
         <>
             <HeaderDisplay />
             <main className="App-main main-container" >
@@ -126,9 +123,7 @@ const AccountHomePage = () => {
                     </div>
                     </> 
                     }
-                    
                 </div>
-                
             </main>
         </>
     )
