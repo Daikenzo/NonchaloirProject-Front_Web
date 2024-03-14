@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+He's Connect from server BDD on this repesitory: [Exress Server](https://github.com/Daikenzo/NonchaloirProject-Back-API)
 
 ## Available Scripts
 
